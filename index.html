@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Principal -->
+    <title>Esthetic Auto Detail | Detailing Automotivo Premium em Recife</title>
+    <link rel="icon" type="image/x-icon" href="sobre/images/favicon.ico">
+    <meta name="description"
+        content="Esthetic Auto Detail - Especialistas em detailing automotivo premium em Recife, Pernambuco. Polimento, proteção cerâmica, higienização interna e externa com padrão de excelência. Redirecionando para a página inicial...">
+    <meta name="keywords"
+        content="detailing automotivo recife, estética automotiva recife, polimento automotivo recife, proteção cerâmica recife, ceramic coating recife, lavagem detalhada recife, detailing premium recife, esthetic auto detail, estética automotiva pernambuco">
+    <meta name="author" content="Esthetic Auto Detail">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="googlebot" content="index, follow">
+
+    <!-- SEO Local / Geo Tags -->
+    <meta name="geo.region" content="BR-PE">
+    <meta name="geo.placename" content="Recife, Pernambuco">
+    <meta name="geo.position" content="-8.0476;-34.8770">
+    <meta name="ICBM" content="-8.0476, -34.8770">
+
+    <!-- Open Graph (Facebook, LinkedIn, WhatsApp etc) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Esthetic Auto Detail | Detailing Automotivo Premium em Recife">
+    <meta property="og:description"
+        content="Transforme seu veículo com serviços premium de detailing automotivo em Recife. Atenção aos detalhes, qualidade superior e resultados que impressionam.">
+    <meta property="og:url" content="https://seudominio.com.br/">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Esthetic Auto Detail">
+    <!-- Recomendado: adicione og:image com logo ou foto de destaque quando disponível -->
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Esthetic Auto Detail | Detailing Automotivo Premium em Recife">
+    <meta name="twitter:description"
+        content="Serviços premium de estética automotiva em Recife, PE. Polimento, coating cerâmico e higienização com excelência.">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://seudominio.com.br/">
+
+    <!-- Structured Data (Schema.org) - Essencial para SEO Local -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Esthetic Auto Detail",
+      "description": "Empresa especializada em serviços premium de detailing automotivo em Recife, Pernambuco. Oferecemos polimento profissional, aplicação de proteção cerâmica, higienização interna e externa, e estética completa para veículos de alto padrão.",
+      "url": "https://seudominio.com.br",
+      "telephone": "+5581981749601",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Avenida Recife, 3452",
+        "addressLocality": "Recife",
+        "addressRegion": "Pernambuco",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -8.0476,
+        "longitude": -34.8770
+      },
+      "openingHours": "Mo-Fr 08:00-18:00, Sa 08:00-12:00",
+      "priceRange": "$$$",
+      "sameAs": [
+        "https://www.instagram.com/estheticautodetail"
+      ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #E8C872;
+            --dark: #0d0d0f;
+            --dark-secondary: #0d0d0f;
+            --text-primary: #f5f5f5;
+            --text-secondary: #aaaaaa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Subtle background pattern for premium feel */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 25% 30%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 75% 70%, rgba(212, 175, 55, 0.025) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 440px;
+            padding: 50px 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            font-size: 2.35rem;
+            font-weight: 700;
+            letter-spacing: 3.5px;
+            color: var(--gold);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.15);
+        }
+
+        .tagline {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            margin-bottom: 45px;
+            letter-spacing: 2.2px;
+            font-weight: 400;
+        }
+
+        .loader-wrapper {
+            margin-bottom: 30px;
+        }
+
+        .loader {
+            border: 3.5px solid #1f1f1f;
+            border-top: 3.5px solid var(--gold);
+            border-radius: 50%;
+            width: 54px;
+            height: 54px;
+            animation: spin 0.85s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+            margin: 0 auto;
+            box-shadow:
+                0 0 20px rgba(212, 175, 55, 0.25),
+                inset 0 0 8px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .message {
+            font-size: 1.08rem;
+            margin-bottom: 12px;
+            color: #e0e0e0;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .submessage {
+            font-size: 0.88rem;
+            color: #777777;
+            max-width: 280px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .footer-brand {
+            position: absolute;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: #444444;
+            letter-spacing: 2.5px;
+            font-weight: 500;
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 480px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            .logo {
+                font-size: 2rem;
+                letter-spacing: 2.8px;
+            }
+
+            .tagline {
+                font-size: 0.85rem;
+                margin-bottom: 38px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Brand -->
+        <div class="logo">Esthetic Auto Detail</div>
+        <div class="tagline">DETAILING AUTOMOTIVO PREMIUM • RECIFE</div>
+
+        <!-- Elegant Loader -->
+        <div class="loader-wrapper">
+            <div class="loader" aria-hidden="true"></div>
+        </div>
+
+        <!-- Messages -->
+        <p class="message">Redirecionando para a página inicial...</p>
+        <p class="submessage">Preparando uma experiência premium para você.</p>
+    </div>
+
+    <!-- Footer branding -->
+    <div class="footer-brand">ESTHETIC AUTO DETAIL © 2026</div>
+
+    <!-- Redirect Meta (fallback for no JS) -->
+    <meta http-equiv="refresh" content="0; url=sobre/">
+
+    <!-- JavaScript Redirect (faster) -->
+    <script>
+        // Immediate redirect to /sobre
+        (function () {
+            const BASE = window.location.hostname.includes("github.io")
+                ? "/EstheticAutoDetailv2"
+                : "";
+
+            window.location.replace(`${BASE}/sobre/`);
+
+            // Use replace to avoid back button issues
+            if (window.location.pathname === '/' ||
+                window.location.pathname.endsWith('/index.html') ||
+                window.location.pathname === '') {
+                window.location.replace(target);
+            }
+        })();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap');
+
+/* ============================================
+   ESTHETIC AUTO DETAIL - Produtos Premium
+   Estilos customizados (separados do index.html)
+   ============================================ */
+
+/* Fonte padrão do site */
+body {
+    font-family: 'Montserrat', system-ui, sans-serif;
+}
+
+/* Regra original do template */
+.section-header {
+    position: relative;
+    display: inline-block;
+}
+
+.section-header:after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(to right, #ff6a00, transparent);
+}
+
+/* ============================================
+   COMPONENTES PREMIUM - Dark Theme + Gold Accents
+   ============================================ */
+
+:root {
+    --gold: #ff6a00;
+    --gold-hover: #f59e0b;
+    --bg-dark: #0d0d0f;
+    --bg-card: #0d0d0f;
+    --text-muted: #6b7280;
+}
+
+/* Botão dourado premium */
+.btn-gold {
+    background-color: #ff6a00;
+    color: #0d0d0f;
+    font-weight: 600;
+    transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+    border: none;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.btn-gold:hover {
+    background-color: #f59e0b;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.15), 0 4px 6px -4px rgb(0 0 0 / 0.15);
+}
+
+.btn-gold:active {
+    transform: scale(0.985);
+}
+
+/* Tipografia elegante para títulos - Bebas Neue */
+.heading-serif {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    line-height: 1.05;
+}
+
+/* Cards de produto */
+.product-card {
+    background-color: #0d0d0f;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.25s cubic-bezier(0.4, 0.0, 0.2, 1), 
+                box-shadow 0.25s cubic-bezier(0.4, 0.0, 0.2, 1),
+                border-color 0.2s ease;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 
+                0 8px 10px -6px rgb(0 0 0 / 0.1);
+    border-color: rgba(251, 122, 25, 0.25);
+}
+
+/* Efeito de zoom na imagem do produto */
+.product-card img {
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                filter 0.3s ease;
+}
+
+.product-card:hover img {
+    transform: scale(1.06);
+}
+
+/* Estilos de preço */
+.price {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+
+.pix-price {
+    font-size: 0.875rem;
+    color: #6b7280;
+    text-decoration: line-through;
+    font-weight: 500;
+}
+
+/* Links da navegação */
+.nav-link {
+    transition: color 0.2s ease;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: #ff6a00;
+}
+
+/* Badge do carrinho */
+.cart-badge {
+    background-color: #ff6a00;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 1;
+    box-shadow: 0 0 0 2px #0d0d0f;
+    display: none; /* controlado via JS */
+}
+
+/* Melhorias visuais nos modais */
+#cart-modal .bg-\[\#111\],
+#checkout-modal .bg-\[\#111\] {
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
+}
+
+/* Estados de foco consistentes */
+input:focus, 
+select:focus {
+    border-color: #ff6a00;
+    box-shadow: 0 0 0 3px rgba(251, 122, 25, 0.1);
+}
+
+/* Responsividade extra para o grid de produtos */
+@media (max-width: 640px) {
+    .product-card {
+        border-radius: 1.5rem;
+    }
+}
+
+/* Animação sutil no carregamento dos cards */
+#products-grid > div {
+    animation: fadeInUp 0.4s ease forwards;
+    opacity: 0;
+}
+
+#products-grid > div:nth-child(1) { animation-delay: 0.05s; }
+#products-grid > div:nth-child(2) { animation-delay: 0.1s; }
+#products-grid > div:nth-child(3) { animation-delay: 0.15s; }
+#products-grid > div:nth-child(4) { animation-delay: 0.2s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

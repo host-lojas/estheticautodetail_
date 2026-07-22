@@ -1,0 +1,104 @@
+/* ============================================
+   ESTHETIC ADMIN - Estilos Personalizados
+   ============================================ */
+
+.admin-nav {
+    background: #111;
+}
+
+/* Botão dourado/laranja principal (substitui classes do assets se necessário) */
+.btn-gold {
+    background-color: #ff6a00;
+    color: #0d0d0f;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-gold:hover {
+    background-color: #e86a0f;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgb(251 122 25 / 0.25);
+}
+
+.btn-gold:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Tipografia premium para títulos */
+.heading-serif {
+    font-family: 'Georgia', 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+}
+
+/* Linhas da tabela de produtos */
+.table-row {
+    transition: background-color 0.15s ease;
+}
+
+.table-row:hover {
+    background-color: #1a1a1a;
+}
+
+/* Botões de aba (tabs) */
+.tab-btn {
+    position: relative;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.tab-btn.active {
+    color: #ff6a00;
+    border-bottom-color: #ff6a00;
+}
+
+/* Melhorias visuais no modal */
+#product-modal {
+    backdrop-filter: blur(8px);
+}
+
+#product-modal > div {
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5),
+                0 10px 10px -6px rgb(0 0 0 / 0.4);
+}
+
+/* Foco nos inputs (acento laranja) */
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #ff6a00 !important;
+    box-shadow: 0 0 0 3px rgba(251, 122, 25, 0.12);
+    outline: none;
+}
+
+/* Drag handle visual */
+.drag-handle {
+    cursor: grab;
+    transition: color 0.2s ease;
+}
+
+.drag-handle:active {
+    cursor: grabbing;
+    color: #ff6a00;
+}
+
+/* Estatísticas cards */
+#dashboard .bg-\[\#111\] {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#dashboard .bg-\[\#111\]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+}
+
+/* Responsividade extra para o admin */
+@media (max-width: 768px) {
+    .tab-btn {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        font-size: 0.875rem;
+    }
+}

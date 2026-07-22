@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d0d0f">
+
+    <!-- SEO Básico -->
+    <title>Esthetic Auto Detail • Estética Automotiva Premium em Recife</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <meta name="description"
+        content="Estética automotiva premium em Recife - PE. Lavagem técnica, polimento profissional, vitrificação cerâmica e proteção de pintura. Resultados impecáveis com produtos de alta performance. Agende agora!">
+    <meta name="keywords"
+        content="estética automotiva recife, polimento automotivo recife, vitrificação recife, detalhamento automotivo recife, lavagem técnica recife, ceramic coating recife, proteção de pintura recife">
+    <meta name="author" content="Esthetic Auto Detail">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Esthetic Auto Detail • Estética Automotiva Premium em Recife">
+    <meta property="og:description"
+        content="Especialistas em estética automotiva premium em Recife. Polimento, vitrificação, proteção de pintura e detalhamento de alto padrão.">
+    <meta property="og:image" content="https://esthetic-auto-detail.com.br/images/hero-studio.jpg">
+    <meta property="og:url" content="https://esthetic-auto-detail.com.br">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Esthetic Auto Detail">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Esthetic Auto Detail • Estética Automotiva Premium">
+    <meta name="twitter:description" content="Polimento profissional, vitrificação e proteção premium em Recife-PE.">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://esthetic-auto-detail.com.br">
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap"
+        rel="stylesheet">
+
+
+    <!-- Structured Data - LocalBusiness + AutoDetailing -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AutoDetailing",
+      "name": "Esthetic Auto Detail",
+      "description": "Estética automotiva premium especializada em polimento profissional, vitrificação cerâmica, proteção de pintura e detalhamento de alto padrão em Recife.",
+      "url": "https://esthetic-auto-detail.com.br",
+      "telephone": "+5581981749601",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Avenida Recife, 3452",
+        "addressLocality": "Ipsep",
+        "addressRegion": "PE",
+        "postalCode": "51150-000",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -8.1195,
+        "longitude": -34.9036
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "08:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:00",
+          "closes": "13:00"
+        }
+      ],
+      "priceRange": "R$ 150 - R$ 2500",
+      "image": "https://esthetic-auto-detail.com.br/images/hero-studio.jpg",
+      "sameAs": [
+        "https://www.instagram.com/esthetic_auto_detail/"
+      ]
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-[#0d0d0f] text-white overflow-x-hidden">
+    <!-- NAVBAR -->
+    <nav id="navbar"
+        class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#0d0d0f]/95 border-b border-white/10">
+        <div class="max-w-screen-2xl mx-auto">
+            <div class="px-4 sm:px-6 lg:px-12 flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-x-3">
+                    <a href="#" class="flex items-center shrink-0">
+                        <img src="images/logo.png" alt="Esthetic Auto Detail"
+                            class="h-14 sm:h-16 w-auto object-contain">
+                    </a>
+                    <div>
+                        <span class="font-semibold tracking-[3px] text-2xl">ESTHETIC</span>
+                        <span class="block text-[10px] text-[#ff6a00] -mt-1.5 tracking-[2px]">AUTO DETAIL</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-x-9 text-sm font-medium">
+                    <a href="#sobre" class="nav-link text-white/90 hover:text-white">Sobre</a>
+                    <a href="#servicos" class="nav-link text-white/90 hover:text-white">Serviços</a>
+                    <a href="#produtos" class="nav-link text-white/90 hover:text-white">Produtos</a>
+                    <a href="../produtos/" class="nav-link text-white/90 hover:text-white">Loja</a>
+                    <a href="#galeria" class="nav-link text-white/90 hover:text-white">Galeria</a>
+                    <a href="#contato" class="nav-link text-white/90 hover:text-white">Contato</a>
+                </div>
+
+                <div class="hidden md:flex items-center gap-x-4">
+                    <a href="https://www.instagram.com/esthetic_auto_detail/" target="_blank"
+                        class="flex items-center gap-x-2 px-5 py-2.5 rounded-full border border-white/20 hover:bg-white/5 transition-colors text-sm">
+                        <i class="fa-brands fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <button onclick="showBookingModal()"
+                        class="px-6 py-2.5 bg-[#ff6a00] hover:bg-[#d4b47e] transition-all text-[#0d0d0f] font-semibold rounded-full text-sm flex items-center gap-x-2">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>Agendar</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn"
+                    class="md:hidden w-11 h-11 flex items-center justify-center text-white/80 hover:text-white">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-[#0d0d0f]">
+            <div class="px-6 py-6 flex flex-col gap-y-4 text-sm">
+                <a href="#sobre" class="py-2 text-white/90">Sobre Nós</a>
+                <a href="#servicos" class="py-2 text-white/90">Serviços</a>
+                <a href="../produtos/" class="py-2 text-white/90">Produtos</a>
+                <a href="#loja" class="py-2 text-white/90">Loja</a>
+                <a href="#galeria" class="py-2 text-white/90">Galeria</a>
+                <a href="#contato" class="py-2 text-white/90">Contato</a>
+
+                <div class="pt-4 flex flex-col gap-y-3">
+                    <a href="https://www.instagram.com/esthetic_auto_detail/" target="_blank"
+                        class="flex items-center justify-center gap-x-2 py-3 border border-white/20 rounded-full">
+                        <i class="fa-brands fa-instagram"></i>
+                        <span>Ver no Instagram</span>
+                    </a>
+                    <button onclick="showBookingModal(); document.getElementById('mobile-menu').classList.add('hidden')"
+                        class="py-3 bg-[#ff6a00] text-[#0d0d0f] font-semibold rounded-full flex items-center justify-center gap-x-2">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>Agendar Serviço</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="relative h-[100dvh] min-h-[680px] flex items-center justify-center pt-20">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('images/hero-studio.jpg')">
+        </div>
+        <div class="hero-overlay absolute inset-0"></div>
+
+        <div class="relative z-10 max-w-screen-2xl mx-auto px-4 sm:px-6 text-center">
+            <div class="max-w-4xl mx-auto">
+                <div
+                    class="inline-flex items-center gap-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full mb-6 border border-white/20">
+                    <div class="w-2 h-2 bg-[#ff6a00] rounded-full animate-pulse"></div>
+                    <span class="text-xs tracking-[2px] font-medium text-white/90">RECIFE • PE</span>
+                </div>
+
+                <h1
+                    class="text-[52px] leading-[0.95] sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-tighter mb-6">
+                    ESTÉTICA<br>AUTOMOTIVA<br><span class="premium-gold">PREMIUM</span>
+                </h1>
+
+                <p class="max-w-md mx-auto text-xl md:text-2xl text-white/80 mb-10 tracking-tight">
+                    Mais que limpeza.<br>
+                    <span class="text-white">Valorização, proteção e perfeição.</span>
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <button onclick="document.getElementById('servicos').scrollIntoView({ behavior: 'smooth' })"
+                        class="group w-full sm:w-auto px-10 py-4 bg-white text-[#0d0d0f] font-semibold rounded-full flex items-center justify-center gap-x-3 hover:bg-[#ff6a00] hover:text-white transition-all text-lg">
+                        <span>Conhecer Serviços</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+
+                    <button onclick="showBookingModal()"
+                        class="w-full sm:w-auto px-10 py-4 border border-white/40 hover:bg-white/10 font-medium rounded-full flex items-center justify-center gap-x-3 text-lg transition-all">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>Agendar Agora</span>
+                    </button>
+                </div>
+
+                <div class="mt-16 flex justify-center">
+                    <div onclick="document.getElementById('sobre').scrollIntoView({ behavior: 'smooth' })"
+                        class="flex flex-col items-center cursor-pointer group">
+                        <span
+                            class="text-xs tracking-[3px] text-white/50 mb-2 group-hover:text-white/70 transition-colors">DESCUBRA
+                            MAIS</span>
+                        <i
+                            class="fa-solid fa-chevron-down text-white/40 group-hover:text-[#ff6a00] transition-all animate-bounce"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SOBRE -->
+    <section id="sobre" class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12 pt-20 pb-16">
+        <div class="grid lg:grid-cols-12 gap-x-16 items-center">
+            <div class="lg:col-span-7">
+                <div class="uppercase tracking-[3px] text-[#ff6a00] text-sm font-medium mb-3">QUEM SOMOS</div>
+                <h2 class="heading-serif text-5xl lg:text-6xl leading-none tracking-[-1.5px] mb-8">
+                    Excelência em<br>cada detalhe.
+                </h2>
+
+                <div class="detail-text text-[15px] max-w-[620px] space-y-6">
+                    <p>Esthetic Auto Detail é especializada em estética automotiva premium, oferecendo serviços de alto
+                        padrão para quem busca mais do que limpeza: valorização, proteção e acabamento impecável do
+                        veículo.</p>
+
+                    <p>Trabalhamos com técnicas avançadas de detalhamento automotivo, incluindo lavagem técnica,
+                        descontaminação de pintura, polimento profissional, vitrificação e proteção com produtos de alta
+                        performance.</p>
+
+                    <p>Cada serviço é executado com precisão, cuidado nos mínimos detalhes e foco total na experiência
+                        do cliente. Nosso compromisso é entregar resultados visuais impactantes, preservando a
+                        originalidade e aumentando a durabilidade do seu veículo, seja para uso diário ou valorização na
+                        revenda.</p>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 mt-12 lg:mt-0">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="card-bg border border-white/10 p-6 rounded-3xl">
+                        <div class="text-4xl font-semibold premium-gold mb-1">+250</div>
+                        <div class="text-sm text-white/70">Veículos transformados</div>
+                    </div>
+                    <div class="card-bg border border-white/10 p-6 rounded-3xl">
+                        <div class="text-4xl font-semibold premium-gold mb-1">5.0</div>
+                        <div class="text-sm text-white/70">Avaliação média</div>
+                    </div>
+                    <div class="card-bg border border-white/10 p-6 rounded-3xl col-span-2">
+                        <div class="flex items-center gap-x-4">
+                            <div>
+                                <div class="text-sm text-white/60">Localização</div>
+                                <div class="font-medium">Avenida Recife, 345 – Ipsep, Recife, PE</div>
+                            </div>
+                            <div class="flex-1 h-px bg-white/10"></div>
+                            <a href="https://maps.app.goo.gl/hFrdp1m4mkpguEtZ7" target="_blank"
+                                class="text-xs px-4 py-2 border border-white/20 rounded-full hover:bg-white/5 transition-colors flex items-center gap-x-2">
+                                <span>Ver no Maps</span> <i class="fa-solid fa-external-link-alt text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr
+        class="border-0 h-[1.5px] w-72 sm:w-96 md:w-[28rem] lg:w-[36rem] mx-auto bg-gradient-to-r from-transparent via-[#ff6a00] to-transparent my-8 sm:my-10">
+
+    <!-- SERVIÇOS -->
+    <section id="servicos" class="bg-[#0d0d0f] py-16">
+        <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-10">
+                <div>
+                    <div class="uppercase tracking-[3px] text-[#ff6a00] text-sm font-medium">O QUE OFERECEMOS</div>
+                    <h2 class="heading-serif text-5xl tracking-[-1.2px]">Serviços Premium</h2>
+                </div>
+            </div>
+            <p class="text-white/60 max-w-xs mt-4 md:mt-0">Técnicas avançadas e produtos de alta performance para
+                resultados que impressionam.</p>
+            <br>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Service 1 -->
+                <div class="service-card card-bg border border-white/10 rounded-3xl p-8 group">
+                    <div
+                        class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-[#ff6a00]/10 transition-colors">
+                        <i class="fa-solid fa-shower text-3xl text-[#ff6a00]"></i>
+                    </div>
+                    <h3 class="font-semibold text-2xl mb-3">Lavagem Técnica</h3>
+                    <p class="text-white/70 text-[15px]">Lavagem completa com técnicas profissionais, produtos pH
+                        neutros e atenção aos mínimos detalhes para um resultado impecável.</p>
+                </div>
+
+                <div class="service-card card-bg border border-white/10 rounded-3xl p-8 group">
+                    <div
+                        class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-[#ff6a00]/10 transition-colors">
+                        <i class="fa-solid fa-magic text-3xl text-[#ff6a00]"></i>
+                    </div>
+                    <h3 class="font-semibold text-2xl mb-3">Descontaminação de Pintura</h3>
+                    <p class="text-white/70 text-[15px]">Remoção de contaminantes ferrosos, argila (clay bar) e
+                        preparação da superfície para tratamentos posteriores.</p>
+                </div>
+
+                <div class="service-card card-bg border border-white/10 rounded-3xl p-8 group">
+                    <div
+                        class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-[#ff6a00]/10 transition-colors">
+                        <i class="fa-solid fa-sync-alt text-3xl text-[#ff6a00]"></i>
+                    </div>
+                    <h3 class="font-semibold text-2xl mb-3">Polimento Profissional</h3>
+                    <p class="text-white/70 text-[15px]">Correção de pintura com múltiplos estágios, remoção de riscos,
+                        swirl marks e oxidação para brilho e profundidade incríveis.</p>
+                </div>
+
+                <div class="service-card card-bg border border-white/10 rounded-3xl p-8 group">
+                    <div
+                        class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-[#ff6a00]/10 transition-colors">
+                        <i class="fa-solid fa-gem text-3xl text-[#ff6a00]"></i>
+                    </div>
+                    <h3 class="font-semibold text-2xl mb-3">Vitrificação / Ceramic Coating</h3>
+                    <p class="text-white/70 text-[15px]">Aplicação de revestimento cerâmico de alta durabilidade que
+                        oferece brilho intenso, proteção contra UV, produtos químicos e facilita a limpeza.</p>
+                </div>
+
+                <div class="service-card card-bg border border-white/10 rounded-3xl p-8 group">
+                    <div
+                        class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-[#ff6a00]/10 transition-colors">
+                        <i class="fa-solid fa-shield-alt text-3xl text-[#ff6a00]"></i>
+                    </div>
+                    <h3 class="font-semibold text-2xl mb-3">Proteção Premium de Pintura</h3>
+                    <p class="text-white/70 text-[15px]">Tratamentos avançados de proteção e correção de pintura com
+                        técnicas de alto nível para máximo brilho e durabilidade.</p>
+                </div>
+
+                <div class="service-card card-bg border border-white/10 rounded-3xl p-8 group">
+                    <div
+                        class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-[#ff6a00]/10 transition-colors">
+                        <i class="fa-solid fa-couch text-3xl text-[#ff6a00]"></i>
+                    </div>
+                    <h3 class="font-semibold text-2xl mb-3">Proteção de Interiores</h3>
+                    <p class="text-white/70 text-[15px]">Limpeza profunda, hidratação e proteção de couro, plásticos,
+                        carpetes e tecidos com produtos premium que preservam o visual e o conforto.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr
+        class="border-0 h-[1.5px] w-72 sm:w-96 md:w-[28rem] lg:w-[36rem] mx-auto bg-gradient-to-r from-transparent via-[#ff6a00] to-transparent my-8 sm:my-10">
+
+    <!-- PRODUTOS -->
+    <section id="produtos" class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12 py-20">
+        <div class="max-w-2xl mb-10">
+            <div class="uppercase tracking-[3px] text-[#ff6a00] text-sm font-medium">PROTEÇÃO DE ALTA PERFORMANCE</div>
+            <h2 class="heading-serif text-5xl tracking-[-1.2px] mt-2">Produtos &amp; Tecnologias</h2>
+            <p class="mt-4 text-white/70">Utilizamos exclusivamente produtos e películas de marcas líderes mundiais em
+                proteção automotiva para garantir resultados duradouros e de excelência.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="product-card card-bg border border-white/10 rounded-3xl overflow-hidden">
+                <img src="images/vfloc.jpg" alt="V FLOC VONIXX" class="w-full h-64 object-cover">
+                <div class="p-7">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-semibold text-xl">V FLOC VONIXX</h4>
+                    </div>
+                    <p class="text-sm text-white/70">É um lava-autos de alta performance com pH neutro e alto poder de
+                        lubrificação.</p>
+                </div>
+            </div>
+
+            <div class="product-card card-bg border border-white/10 rounded-3xl overflow-hidden">
+                <img src="images/luva-micro.webp" alt="Luva de microfibra Chenille" class="w-full h-64 object-cover">
+                <div class="p-7">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-semibold text-xl">Luva De Microfibra</h4>
+                    </div>
+                    <p class="text-sm text-white/70">A Luva de Microfibra Chenille é ideal para quem busca praticidade,
+                        alta absorção e acabamento profissional na limpeza automotiva.</p>
+                </div>
+            </div>
+
+            <div class="product-card card-bg border border-white/10 rounded-3xl overflow-hidden">
+                <img src="images/flanela-micro.webp" alt="Flanela de microfibra" class="w-full h-64 object-cover">
+                <div class="p-7">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-semibold text-xl">FLANELA DE MICROFIBRA</h4>
+                    </div>
+                    <p class="text-sm text-white/70">A flanela de microfibra é composta por fios sintéticos de poliéster
+                        e poliamida (geralmente na proporção de 80% e 20%), que formam fibras ultrafinas.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botões de ação na seção de produtos -->
+        <div class="mt-14 pt-10 border-t border-white/10">
+            <div class="max-w-lg mx-auto text-center mb-8">
+                <div class="uppercase tracking-[3px] text-[#ff6a00] text-xs font-medium mb-2">LINHA COMPLETA DE
+                    PRODUTOS
+                </div>
+                <p class="text-white/70 text-[15px]">Conheça todos os produtos premium que utilizamos em nossos
+                    serviços
+                    e que você pode adquirir para manter seu veículo sempre impecável.</p>
+            </div>
+
+            <div class="flex flex-col items-center justify-center gap-5">
+                <!-- Ver mais produtos -->
+                <a href="../produtos/"
+                    class="inline-flex items-center justify-center gap-x-3 px-10 py-4 bg-[#ff6a00] hover:bg-[#e56a0f] transition-all text-white font-semibold rounded-2xl text-lg min-w-[240px]">
+                    <span>Ver mais produtos</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+                <!-- Mercado Livre (abaixo + menor) -->
+                <div class="flex flex-col items-center gap-1.5">
+                    <p class="text-sm text-white/60 font-medium tracking-wide">
+                        não é da região?
+                    </p>
+                    <a href="https://www.mercadolivre.com.br/" target="_blank"
+                        class="group inline-flex items-center justify-center gap-x-2.5 px-6 py-2.5 border border-white/25 hover:bg-white/5 hover:border-white/40 text-white rounded-xl transition-all text-base min-w-[200px]">
+                        <img src="images/mercado-livre.jpg" alt="Mercado Livre"
+                            class="w-[18px] h-[18px] rounded-md object-cover transition-transform group-hover:scale-110">
+                        <span class="font-semibold tracking-wide">Peça no Mercado Livre</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORNECEDORES -->
+    <section id="marcas" class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12 py-16 bg-white text-black">
+        <div class="text-center mb-10">
+            <h2 class="text-4xl font-bold tracking-tight">Marcas</h2>
+            <p class="mt-3 text-gray-600 max-w-md mx-auto">Temos as melhores marcas do Brasil e do Mundo para te
+                atender da melhor forma</p>
+            <div class="w-12 h-0.5 bg-[#ff6a00] mx-auto mt-4"></div>
+        </div>
+
+        <div
+            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-x-8 gap-y-10 items-center justify-items-center">
+
+            <!-- AUTOAMERICA -->
+            <div class="w-full max-w-[200px]">
+                <!-- INSIRA O LOGO AQUI - Resolução recomendada: 300x150px ou 250x250px -->
+                <div class="h-20 flex items-center justify-center bg-gray-100 rounded-xl border border-gray-200">
+                    <img src="suppliers/autoamerica.jpg" alt="AUTOAMERICA">
+                </div>
+            </div>
+
+            <!-- CENTRAL SUL -->
+            <div class="w-full max-w-[200px]">
+                <div class="h-20 flex items-center justify-center bg-gray-100 rounded-xl border border-gray-200">
+                    <img src="suppliers/centralsul.jpg" alt="CENTRAL SUL">
+                </div>
+            </div>
+
+            <!-- AERON -->
+            <div class="w-full max-w-[200px]">
+                <div class="h-20 flex items-center justify-center bg-gray-100 rounded-xl border border-gray-200">
+                    <img src="suppliers/aeron.webp" alt="AERON">
+                </div>
+            </div>
+
+            <!-- PROTELIM -->
+            <div class="w-full max-w-[200px]">
+                <div class="h-20 flex items-center justify-center bg-gray-100 rounded-xl border border-gray-200">
+                    <img src="suppliers/protelim.webp" alt="PROTELIM">
+                </div>
+            </div>
+
+            <!-- SOFT99 -->
+            <div class="w-full max-w-[200px]">
+                <div class="h-20 flex items-center justify-center bg-gray-100 rounded-xl border border-gray-200">
+                    <img src="suppliers/soft99.png" alt="SOFT99">
+                </div>
+            </div>
+
+            <!-- VINTEX -->
+            <div class="w-full max-w-[200px]">
+                <div class="h-20 flex items-center justify-center bg-gray-100 rounded-xl border border-gray-200">
+                    <img src="suppliers/vintex.webp" alt="VINTEX">
+                </div>
+            </div>
+
+            <!-- VONIX -->
+            <div class="w-full max-w-[200px]">
+                <div class="h-20 flex items-center justify-center bg-gray-100 rounded-xl border border-gray-200">
+                    <img src="suppliers/vonixx.png" alt="VONIX">
+                </div>
+            </div>
+
+            <!-- EASYTECH -->
+            <div class="w-full max-w-[200px]">
+                <div class="h-20 flex items-center justify-center bg-gray-100 rounded-xl border border-gray-200">
+                    <img src="suppliers/easytech.png" alt="EASYTECH">
+                </div>
+            </div>
+
+            <!-- zacs -->
+            <div class="w-full max-w-[200px]">
+                <div class="h-20 flex items-center justify-center bg-gray-100 rounded-xl border border-gray-200">
+                    <img src="suppliers/zacs.jpg" alt="zacs">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- EQUIPE -->
+    <section id="equipe" class="bg-[#0d0d0f] py-16">
+        <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12">
+            <div class="text-center mb-10">
+                <div class="uppercase tracking-[3px] text-[#ff6a00] text-sm font-medium">PROFISSIONAIS ESPECIALIZADOS
+                </div>
+                <h2 class="heading-serif text-5xl tracking-[-1.2px] mt-2">Nossa Equipe</h2>
+            </div>
+
+            <!-- Flex + justify-center: 1 card fica centralizado. Conforme adicionar mais, eles vão se acumulando e se reorganizando centralizados -->
+            <div class="flex flex-wrap justify-center gap-6">
+                <div class="card-bg border border-white/10 rounded-3xl p-8 text-center w-full max-w-xs">
+                    <!-- INSIRA A FOTO DO PROFISSIONAL AQUI (recomendado 300x300 ou maior) -->
+                    <div class="w-24 h-24 mx-auto mb-5 rounded-2xl bg-white/10 overflow-hidden border border-white/20">
+                        <!-- <img src="caminho/da/foto.jpg" class="w-full h-full object-cover"> -->
+                    </div>
+                    <h4 class="font-semibold text-xl">Felipe</h4>
+                    <p class="text-[#ff6a00] text-sm mb-3">Fundador &amp; Detalhador Sênior</p>
+                    <p class="text-sm text-white/60">+12 anos de experiência em estética automotiva premium.</p>
+                </div>
+
+                <!-- 
+            Exemplo de como adicionar outros (só copiar o bloco acima):
+            <div class="card-bg border border-white/10 rounded-3xl p-8 text-center w-full max-w-xs">
+                ...
+            </div>
+            -->
+            </div>
+        </div>
+    </section>
+
+    <hr
+        class="border-0 h-[1.5px] w-72 sm:w-96 md:w-[28rem] lg:w-[36rem] mx-auto bg-gradient-to-r from-transparent via-[#ff6a00] to-transparent my-8 sm:my-10">
+
+    <!-- AVALIAÇÕES -->
+    <section id="avaliacoes" class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12 py-12">
+        <div class="text-center mb-8">
+            <div class="uppercase tracking-[3px] text-[#ff6a00] text-sm font-medium">O QUE NOSSOS CLIENTES DIZEM</div>
+            <h2 class="heading-serif text-5xl tracking-[-1.2px] mt-2">Avaliações</h2>
+        </div>
+
+        <!-- Grid de avaliações (rápido, compacto e profissional) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <!-- Avaliação 1 -->
+            <div class="card-bg border border-white/10 rounded-3xl p-6 testimonial-card">
+                <div class="flex text-[#ff6a00] mb-3 text-lg">★★★★★</div>
+                <p class="text-white/80 text-[14.5px] leading-relaxed mb-4">"O resultado superou todas as expectativas.
+                    Meu carro voltou como se fosse zero km."</p>
+                <div class="text-sm"><span class="font-medium">João Pedro</span> <span class="text-white/50">• Porsche
+                        911</span></div>
+            </div>
+
+            <!-- Avaliação 2 -->
+            <div class="card-bg border border-white/10 rounded-3xl p-6 testimonial-card">
+                <div class="flex text-[#ff6a00] mb-3 text-lg">★★★★☆</div>
+                <p class="text-white/80 text-[14.5px] leading-relaxed mb-4">"Profissionalismo impecável. A proteção
+                    aplicada foi perfeita e o atendimento excelente."</p>
+                <div class="text-sm"><span class="font-medium">Mariana Costa</span> <span class="text-white/50">• Jeep
+                        Commander</span></div>
+            </div>
+
+            <!-- Avaliação 3 -->
+            <div class="card-bg border border-white/10 rounded-3xl p-6 testimonial-card">
+                <div class="flex text-[#ff6a00] mb-3 text-lg">★★★★★</div>
+                <p class="text-white/80 text-[14.5px] leading-relaxed mb-4">"Melhor investimento que fiz no meu carro. O
+                    brilho e a proteção são incríveis."</p>
+                <div class="text-sm"><span class="font-medium">Roberto Almeida</span> <span class="text-white/50">•
+                        Mercedes-Benz</span></div>
+            </div>
+
+            <!-- Avaliação 4 -->
+            <div class="card-bg border border-white/10 rounded-3xl p-6 testimonial-card">
+                <div class="flex text-[#ff6a00] mb-3 text-lg">★★★★★</div>
+                <p class="text-white/80 text-[14.5px] leading-relaxed mb-4">"Equipe muito atenciosa e resultado final
+                    impecável. Recomendo de olhos fechados."</p>
+                <div class="text-sm"><span class="font-medium">Fernanda Silva</span> <span class="text-white/50">• BMW
+                        X5</span></div>
+            </div>
+        </div>
+
+        <p class="text-center text-xs text-white/40 mt-6">Avaliações reais de clientes • Recife, PE</p>
+    </section>
+
+    <!-- GALERIA / ANTES E DEPOIS MELHORADO -->
+    <section id="galeria" class="bg-[#0d0d0f] py-16">
+        <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-9">
+                <div>
+                    <div class="uppercase tracking-[3px] text-[#ff6a00] text-sm font-medium">RESULTADOS REAIS</div>
+                    <h2 class="heading-serif text-5xl tracking-[-1.2px]">Antes &amp; Depois</h2>
+                </div>
+                <a href="https://www.instagram.com/esthetic_auto_detail/" target="_blank"
+                    class="mt-4 md:mt-0 inline-flex items-center gap-x-2 text-sm text-white/70 hover:text-white transition-colors">
+                    Ver mais no Instagram <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                </a>
+            </div>
+
+            <!-- Comparador Interativo Antes e Depois -->
+            <div class="max-w-4xl mx-auto">
+                <div class="relative w-full aspect-[16/9] rounded-3xl overflow-hidden border border-white/10 shadow-2xl mb-4"
+                    id="comparison-container">
+                    <!-- Imagem Antes -->
+                    <img src="images/depois.jpeg" class="absolute inset-0 w-full h-full object-cover"
+                        alt="Antes do detalhamento">
+
+                    <!-- Imagem Depois (com clip) -->
+                    <img src="images/antes.jpeg" class="absolute inset-0 w-full h-full object-cover" id="after-image"
+                        style="clip-path: inset(0 50% 0 0);" alt="Depois do detalhamento">
+
+                    <!-- Linha divisória e alça -->
+                    <div id="slider-handle"
+                        class="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize flex items-center justify-center"
+                        style="left: 50%;">
+                        <div
+                            class="w-9 h-9 bg-white rounded-full shadow-xl flex items-center justify-center -ml-4 border-2 border-[#ff6a00]">
+                            <i class="fa-solid fa-arrows-alt-h text-[#ff6a00] text-lg"></i>
+                        </div>
+                    </div>
+
+                    <div class="absolute top-6 left-6 bg-black/60 px-4 py-1 rounded-full text-xs font-medium">ANTES
+                    </div>
+                    <div class="absolute top-6 right-6 bg-black/60 px-4 py-1 rounded-full text-xs font-medium">DEPOIS
+                    </div>
+                </div>
+
+                <p class="text-center text-sm text-white/60">Arraste a barra para comparar o antes e depois</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCALIZAÇÃO / CONTATO -->
+    <section id="contato" class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12 py-20">
+        <div class="grid lg:grid-cols-2 gap-x-16 gap-y-12">
+            <!-- Info -->
+            <div>
+                <div class="uppercase tracking-[3px] text-[#ff6a00] text-sm font-medium mb-3">VENHA NOS CONHECER</div>
+                <h2 class="heading-serif text-5xl tracking-[-1.5px] leading-none mb-8">Avenida Recife, 345<br>Ipsep,
+                    Recife, PE</h2>
+
+                <div class="space-y-8 text-[15px]">
+                    <div>
+                        <div class="text-white/50 text-xs tracking-widest mb-1">ENDEREÇO</div>
+                        <div class="font-medium"> Avenida Recife, 3452 – Ipsep, Recife, PE</div>
+                        <a href="https://maps.app.goo.gl/hFrdp1m4mkpguEtZ7" target="_blank"
+                            class="inline-flex items-center gap-x-2 text-[#ff6a00] hover:underline mt-1 text-sm">
+                            Abrir no Google Maps <i class="fa-solid fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+
+                    <div>
+                        <div class="text-white/50 text-xs tracking-widest mb-1">CONTATO</div>
+                        <div class="flex flex-col gap-y-1">
+                            <a href="https://www.instagram.com/esthetic_auto_detail/" target="_blank"
+                                class="flex items-center gap-x-3 hover:text-[#ff6a00] transition-colors">
+                                <i class="fa-brands fa-instagram w-5"></i>
+                                <span>@esthetic_auto_detail</span>
+                            </a>
+                            <div class="flex items-center gap-x-3 text-white/80">
+                                <i class="fa-brands fa-whatsapp w-5"></i>
+                                <span>Agende via WhatsApp ou Instagram</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="text-white/50 text-xs tracking-widest mb-1">HORÁRIO DE ATENDIMENTO</div>
+                        <div class="text-white/80">Segunda a Sexta: 8h às 17h<br>Sábado: 8h às 13h</div>
+                    </div>
+                </div>
+
+                <div class="mt-9">
+                    <button onclick="showBookingModal()"
+                        class="px-9 py-4 bg-[#ff6a00] hover:bg-[#d4b47e] transition-all text-[#0d0d0f] font-semibold rounded-full flex items-center gap-x-3 text-base">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>Agendar meu serviço agora</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="card-bg border border-white/10 rounded-3xl p-9">
+                <h3 class="font-semibold text-2xl mb-2">Fale conosco</h3>
+                <p class="text-white/60 mb-7 text-sm">Preencha o formulário e retornaremos em até 2 horas úteis.</p>
+
+                <form id="contact-form" onsubmit="submitForm(event)">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label class="text-xs text-white/60 block mb-1.5">NOME COMPLETO</label>
+                            <input type="text" id="form-nome" required
+                                class="w-full bg-white/5 border border-white/10 focus:border-[#ff6a00]/60 rounded-2xl px-5 py-3 text-sm outline-none transition-colors">
+                        </div>
+                        <div>
+                            <label class="text-xs text-white/60 block mb-1.5">TELEFONE / WHATSAPP</label>
+                            <input type="tel" id="form-whatsapp" required
+                                class="w-full bg-white/5 border border-white/10 focus:border-[#ff6a00]/60 rounded-2xl px-5 py-3 text-sm outline-none transition-colors">
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <label class="text-xs text-white/60 block mb-1.5">MODELO DO VEÍCULO</label>
+                        <input type="text" id="form-veiculo" placeholder="Ex: Porsche 911 Carrera / Jeep Commander"
+                            class="w-full bg-white/5 border border-white/10 focus:border-[#ff6a00]/60 rounded-2xl px-5 py-3 text-sm outline-none transition-colors">
+                    </div>
+
+                    <div class="mt-5">
+                        <label class="text-xs text-white/60 block mb-1.5">SERVIÇO DESEJADO</label>
+                        <select id="form-servico"
+                            class="w-full bg-[#0d0d0f] text-white border border-white/20 focus:border-[#ff6a00] rounded-2xl px-5 py-3 text-sm outline-none transition-colors">
+                            <option>Lavagem Detalhada</option>
+                            <option>Lavagem de Motor</option>
+                            <option>Polimento Comercial</option>
+                            <option>Polimento Técnico</option>
+                            <option>Vitrificação</option>
+                            <option>Higienização Interna</option>
+                        </select>
+                    </div>
+
+                    <div class="mt-5">
+                        <label class="text-xs text-white/60 block mb-1.5">MENSAGEM / OBSERVAÇÕES</label>
+                        <textarea id="form-mensagem" rows="3"
+                            placeholder="Ex: Gostaria de um orçamento para vitrificação + PPF..."
+                            class="w-full resize-y bg-white/5 border border-white/10 focus:border-[#ff6a00]/60 rounded-3xl px-5 py-3 text-sm outline-none transition-colors"></textarea>
+                    </div>
+
+                    <button type="submit"
+                        class="mt-6 w-full py-4 bg-white text-[#0d0d0f] font-semibold rounded-2xl hover:bg-[#ff6a00] hover:text-white transition-all flex items-center justify-center gap-x-2">
+                        <span>ENVIAR SOLICITAÇÃO</span>
+                    </button>
+
+                    <p class="text-[10px] text-center text-white/40 mt-4">Seus dados são tratados com total
+                        confidencialidade.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/10 bg-[#0d0d0f]">
+        <div
+            class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-12 py-9 flex flex-col md:flex-row md:items-center justify-between gap-y-4 text-sm">
+            <div class="flex items-center gap-x-2 text-white/60">
+                <span>© 2026 Esthetic Auto Detail</span>
+                <span class="hidden md:inline">•</span>
+                <span class="hidden md:inline">Todos os direitos reservados</span>
+            </div>
+
+            <div class="text-white/50 text-xs md:text-sm flex items-center gap-x-1.5">
+                Site desenvolvido por
+                <a class="font-medium text-[#ff6a00]" href="https://www.lucasrenan.online/" target="_blank">Lucas
+                    Renan</a>
+            </div>
+
+            <div class="flex items-center gap-x-5 text-white/60">
+                <a href="https://www.instagram.com/esthetic_auto_detail/" target="_blank"
+                    class="hover:text-white transition-colors">
+                    <i class="fa-brands fa-instagram text-lg"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" onclick="if (event.target.id === 'booking-modal') hideBookingModal()"
+        class="hidden fixed inset-0 bg-black/70 z-[100] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()"
+            class="modal bg-[#0d0d0f] border border-white/10 rounded-3xl max-w-md w-full p-8">
+            <div class="flex justify-between items-start mb-6">
+                <div>
+                    <h3 class="font-semibold text-3xl tracking-tight">Agendar Serviço</h3>
+                    <p class="text-white/60 text-sm mt-1">Preencha seus dados e entraremos em contato</p>
+                </div>
+                <button onclick="hideBookingModal()" class="text-white/50 hover:text-white p-1">
+                    <i class="fa-solid fa-times text-2xl"></i>
+                </button>
+            </div>
+
+            <form onsubmit="submitBookingForm(event)">
+                <div class="space-y-5">
+                    <div>
+                        <label class="block text-xs tracking-wider text-white/60 mb-1.5">SEU NOME</label>
+                        <input type="text" id="booking-nome" required
+                            class="w-full bg-white/5 border border-white/10 px-5 py-[13px] rounded-2xl text-sm focus:outline-none focus:border-[#ff6a00]">
+                    </div>
+                    <div class="grid grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-xs tracking-wider text-white/60 mb-1.5">WHATSAPP</label>
+                            <input type="tel" id="booking-whatsapp" required placeholder="(81) 98174-9601"
+                                class="w-full bg-white/5 border border-white/10 px-5 py-[13px] rounded-2xl text-sm focus:outline-none focus:border-[#ff6a00]">
+                        </div>
+                        <div>
+                            <label class="block text-xs tracking-wider text-white/60 mb-1.5">VEÍCULO</label>
+                            <input type="text" id="booking-veiculo" required placeholder="Modelo / Ano"
+                                class="w-full bg-white/5 border border-white/10 px-5 py-[13px] rounded-2xl text-sm focus:outline-none focus:border-[#ff6a00]">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs tracking-wider text-white/60 mb-1.5">QUAL SERVIÇO DESEJA?</label>
+                        <select id="booking-servico" required
+                            class="w-full bg-[#0d0d0f] text-white border border-white/20 px-5 py-[13px] rounded-2xl text-sm focus:outline-none focus:border-[#ff6a00]">
+                            <option value="">Selecione...</option>
+                            <option>Lavagem Detalhada</option>
+                            <option>Lavagem de Motor</option>
+                            <option>Polimento Comercial</option>
+                            <option>Polimento Técnico</option>
+                            <option>Vitrificação</option>
+                            <option>Higienização Interna</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex gap-x-3">
+                    <button type="button" onclick="hideBookingModal()"
+                        class="flex-1 py-3.5 border border-white/20 hover:bg-white/5 rounded-2xl text-sm font-medium transition-colors">
+                        Cancelar
+                    </button>
+                    <button type="submit"
+                        class="flex-1 py-3.5 bg-[#ff6a00] text-[#0d0d0f] font-semibold rounded-2xl hover:bg-[#d4b47e] transition-all">
+                        Enviar Pedido de Agendamento
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="image-modal" onclick="hideImageModal()"
+        class="hidden fixed inset-0 bg-black/90 z-[110] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()" class="max-w-[1100px] w-full relative">
+            <button onclick="hideImageModal()"
+                class="absolute -top-3 -right-3 md:-right-4 bg-[#111] hover:bg-white/10 border border-white/20 text-white w-9 h-9 rounded-full flex items-center justify-center z-10">
+                <i class="fa-solid fa-times"></i>
+            </button>
+            <img id="modal-image" class="w-full max-h-[85dvh] object-contain rounded-2xl shadow-2xl" alt="">
+            <div id="modal-caption" class="text-center text-white/70 mt-4 text-sm"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

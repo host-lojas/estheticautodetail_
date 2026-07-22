@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap');
+
+:root {
+    --gold: #ff6a00;
+    --dark: #0d0d0f;
+    --card: #0d0d0f;
+}
+
+body {
+    font-family: 'Inter', system_ui, sans-serif;
+    background-color: var(--dark);
+    color: white;
+    overflow-x: hidden;
+}
+
+.heading-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.gold {
+    color: var(--gold);
+}
+
+.btn-gold {
+    background-color: var(--gold);
+    color: #0d0d0f;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-gold:hover {
+    background-color: #e86a0f;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgb(251 122 25 / 0.3);
+}
+
+.product-card {
+    background-color: var(--card);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+    border-color: rgba(251, 122, 25, 0.2);
+}
+
+.price {
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.pix-price {
+    color: #f87171;
+    font-size: 0.95rem;
+}
+
+.nav-link {
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: var(--gold);
+}
+
+.cart-badge {
+    background-color: var(--gold);
+    color: #0d0d0f;
+    font-size: 0.65rem;
+    font-weight: 700;
+}
+
+.admin-sidebar {
+    background-color: #111;
+    border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+.table-row {
+    transition: background-color 0.2s;
+}
+
+.table-row:hover {
+    background-color: #1a1a1a;
+}
+
+.modal {
+    animation: fadeInModal 0.2s ease forwards;
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.drag-handle {
+    cursor: grab;
+}
+
+.drag-handle:active {
+    cursor: grabbing;
+}
+
+.empty-state {
+    border: 2px dashed rgba(255,255,255,0.15);
+}

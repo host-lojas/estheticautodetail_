@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap');
+
+:root {
+    --gold: #ff6a00;
+}
+
+body {
+    font-family: 'Montserrat', system-ui, sans-serif;
+    overflow-x: hidden;
+}
+
+.heading-serif {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+}
+
+.section-header {
+    position: relative;
+    display: inline-block;
+}
+
+select option {
+    background-color: #2c2f33;
+    color: #ffffff;
+}
+
+select option:hover,
+select option:checked {
+    background-color: #ff6a00;
+    color: #2c2f33;
+}
+
+.section-header:after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(to right, #ff6a00, transparent);
+}
+
+.nav-link {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link:hover {
+    color: #ff6a00;
+    transform: translateY(-1px);
+}
+
+/* Marquee de avaliações */
+.animate-marquee {
+    animation: marquee 24s linear infinite;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-marquee:hover {
+    animation-play-state: paused;
+}
+
+.service-card,
+.product-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-card:hover,
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
+}
+
+.premium-gold {
+    color: #ff6a00;
+}
+
+.dark-bg {
+    background-color: #2c2f33;
+}
+
+.card-bg {
+    background-color: #2c2f33;
+}
+
+.hero-overlay {
+    background: linear-gradient(to bottom,
+            rgba(10, 10, 10, 0.65) 0%,
+            rgba(10, 10, 10, 0.75) 100%);
+}
+
+.gallery-img {
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.2), 0 8px 10px -6px rgb(0 0 0 / 0.2);
+}
+
+.stat-number {
+    font-variant-numeric: tabular-nums;
+}
+
+.detail-text {
+    color: #a3a3a3;
+    line-height: 1.7;
+}
+
+.nav-scrolled {
+    background-color: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(12px);
+}
+
+.modal {
+    animation: fadeInModal 0.2s ease forwards;
+}
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.car-shadow {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3),
+        0 4px 6px -4px rgb(0 0 0 / 0.3);
+}
+
+/* Estilos extras para o comparador Antes/Depois */
+#comparison-container {
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: pan-y;
+}
+
+#slider-handle {
+    transition: left 0.05s linear;
+    z-index: 10;
+}
+
+#slider-handle:active .fa-arrows-alt-h {
+    transform: scale(1.1);
+}
+
+/* ========================================
+   SMOOTH ANIMATIONS - Premium Feel
+======================================== */
+
+/* Fade in up animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    opacity: 0;
+    animation: fadeInUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Staggered delay for multiple elements */
+.animate-delay-100 { animation-delay: 100ms; }
+.animate-delay-200 { animation-delay: 200ms; }
+.animate-delay-300 { animation-delay: 300ms; }
+.animate-delay-400 { animation-delay: 400ms; }
+
+/* Enhanced card hover with smooth scale + shadow */
+.service-card,
+.product-card,
+.testimonial-card {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s ease;
+}
+
+.service-card:hover,
+.product-card:hover,
+.testimonial-card:hover {
+    transform: translateY(-10px) scale(1.01);
+    box-shadow: 0 30px 70px -15px rgb(0 0 0 / 0.5);
+    border-color: rgba(251, 122, 25, 0.3);
+}
+
+/* Subtle scale on buttons */
+button, .btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover, .btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Navbar smooth background transition already good */
+
+/* Image zoom on hover for gallery/products */
+.product-card img {
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.product-card:hover img {
+    transform: scale(1.08);
+}
+
+/* Smooth section entrance */
+section {
+    scroll-margin-top: 80px;
+}
+
+/* Logo adjustments */
+nav img[alt="Esthetic Auto Detail"] {
+    max-height: 64px;
+    transition: opacity 0.3s ease;
+}
+
+nav img[alt="Esthetic Auto Detail"]:hover {
+    opacity: 0.9;
+}

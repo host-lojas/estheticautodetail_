@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos • Esthetic Auto Detail</title>
+    <link rel="icon" type="image/x-icon" href="icon/icon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos mínimos inline mantidos apenas se necessário.
+           A maior parte foi movida para style.css */
+    </style>
+</head>
+
+<body class="bg-[#0d0d0f] text-white">
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#0d0d0f]/95 border-b border-white/10 backdrop-blur-lg">
+        <div class="max-w-screen-2xl mx-auto px-6 flex items-center justify-between h-20">
+            <div class="flex items-center gap-x-3">
+                <div class="flex items-center gap-x-2">
+                    <a href="#" class="flex items-center shrink-0">
+                        <img src="../sobre/images/logo.png" alt="Esthetic Auto Detail"
+                            class="h-14 sm:h-16 w-auto object-contain">
+                    </a>
+                </div>
+
+                <div class="flex items-center gap-x-8 text-sm">
+                    <a href="../sobre/index.html" class="nav-link text-white/80 hover:text-white">Sobre</a>
+                    <a href="#catalogo" class="nav-link text-white/80 hover:text-white">Catálogo</a>
+                    <a href="#marcas" class="nav-link text-white/80 hover:text-white">Marcas</a>
+
+                    <div class="flex items-center gap-x-4">
+                        <!-- Cart -->
+                        <button onclick="openCart()"
+                            class="flex items-center gap-x-2 px-4 py-2 rounded-2xl border border-white/20 hover:border-[#ff6a00]/50 transition-colors relative">
+                            <i class="fa-solid fa-shopping-cart"></i>
+                            <span class="text-sm font-medium">Carrinho</span>
+                            <span id="cart-count"
+                                class="cart-badge absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center rounded-full text-[10px]">0</span>
+                        </button>
+
+                        <a href="../admin/index.html"
+                            class="flex items-center gap-x-2 px-5 py-2 text-sm rounded-2xl border border-white/20 hover:bg-white/5 transition-colors">
+                            <i class="fa-solid fa-user-shield mr-1.5"></i>
+                            <span>Admin</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    </nav>
+
+    <div class="h-20"></div>
+
+    <!-- HERO -->
+    <div class="max-w-screen-2xl mx-auto px-6 pt-12 pb-8">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-y-4">
+            <div>
+                <div class="uppercase tracking-[4px] text-[#ff6a00] text-xs font-semibold mb-2">ESTHETIC AUTO DETAIL
+                </div>
+                <h1 class="heading-serif text-6xl tracking-[-2.5px] leading-none">Produtos<br>Premium</h1>
+                <p class="mt-4 text-xl text-white/70 max-w-md">Tudo que você precisa para manter seu veículo impecável.
+                    Qualidade profissional ao seu alcance.</p>
+            </div>
+
+            <div class="flex items-center gap-x-3">
+                <button onclick="document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})"
+                    class="btn-gold px-8 py-3.5 rounded-3xl flex items-center gap-x-2 text-sm font-semibold">
+                    Ver Catálogo <i class="fa-solid fa-arrow-down ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FILTROS + BUSCA -->
+    <div class="max-w-screen-2xl mx-auto px-6 pb-8 sticky top-20 z-40 bg-[#0d0d0f] pt-4 border-b border-white/10">
+        <div class="flex flex-col lg:flex-row gap-4 items-center">
+            <!-- Busca -->
+            <div class="flex-1 w-full">
+                <div class="relative">
+                    <i class="fa-solid fa-search absolute left-5 top-4 text-white/40"></i>
+                    <input id="search-input" type="text" placeholder="Buscar produtos, marcas ou kits..."
+                        onkeyup="filterProducts()"
+                        class="w-full bg-[#111] border border-white/10 focus:border-[#ff6a00]/60 pl-12 pr-5 py-3.5 rounded-3xl text-sm outline-none">
+                </div>
+            </div>
+
+            <!-- Filtros -->
+            <div class="flex gap-x-3 w-full lg:w-auto">
+                <select id="brand-filter" onchange="filterProducts()"
+                    class="bg-[#111] border border-white/10 px-5 py-3 rounded-3xl text-sm min-w-[160px]">
+                    <option value="">Todas as marcas</option>
+                </select>
+
+                <select id="category-filter" onchange="filterProducts()"
+                    class="bg-[#111] border border-white/10 px-5 py-3 rounded-3xl text-sm min-w-[160px]">
+                    <option value="">Todas as categorias</option>
+                    <option value="produto">Produtos</option>
+                    <option value="kit">Kits</option>
+                    <option value="acessorio">Acessórios</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- CATÁLOGO -->
+    <div id="catalogo" class="max-w-screen-2xl mx-auto px-6 py-12">
+        <div class="flex items-end justify-between mb-8">
+            <div>
+                <div class="uppercase tracking-[3px] text-[#ff6a00] text-xs font-medium">CATÁLOGO COMPLETO</div>
+                <h2 class="heading-serif text-4xl tracking-[-1px]">Nossos Produtos</h2>
+            </div>
+            <div id="results-count" class="text-sm text-white/60"></div>
+        </div>
+
+        <!-- Grid de Produtos -->
+        <div id="products-grid"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+            <!-- Produtos carregados via JS + Supabase -->
+        </div>
+
+        <div id="empty-state" class="hidden text-center py-16">
+            <i class="fa-solid fa-boxes text-5xl text-white/20 mb-4"></i>
+            <h3 class="text-2xl font-semibold mb-2">Nenhum produto encontrado</h3>
+            <p class="text-white/60 max-w-xs mx-auto">Tente ajustar os filtros ou volte mais tarde. Novos lançamentos
+                chegam toda semana.</p>
+        </div>
+    </div>
+
+    <!-- MARCAS -->
+    <div id="marcas" class="max-w-screen-2xl mx-auto px-6 py-16 border-t border-white/10">
+        <div class="text-center mb-10">
+            <div class="uppercase tracking-[3px] text-[#ff6a00] text-xs font-medium">PARCEIROS DE CONFIANÇA</div>
+            <h2 class="heading-serif text-4xl tracking-[-1px] mt-2">Marcas que utilizamos</h2>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-x-12 gap-y-8 opacity-80">
+            <div class="text-center"><i class="fa-solid fa-shield-halved text-4xl mb-2"></i>
+                <div class="text-sm mt-1">EasyTech</div>
+            </div>
+            <div class="text-center"><i class="fa-solid fa-shield-halved text-4xl mb-2"></i>
+                <div class="text-sm mt-1">Central Sul</div>
+            </div>
+            <div class="text-center"><i class="fa-solid fa-shield-halved text-4xl mb-2"></i>
+                <div class="text-sm mt-1">Vonixx</div>
+            </div>
+            <div class="text-center"><i class="fa-solid fa-shield-halved text-4xl mb-2"></i>
+                <div class="text-sm mt-1">Zacs</div>
+            </div>
+            <div class="text-center"><i class="fa-solid fa-shield-halved text-4xl mb-2"></i>
+                <div class="text-sm mt-1">Autoamerica</div>
+            </div>
+            <p class="w-full text-center text-white/60 mt-6">E muitas outras marcas premium que utilizamos em nossos
+                serviços e que você pode adquirir aqui.</p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/10 py-8 text-sm text-white/50">
+        <div class="max-w-screen-2xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-y-4">
+            <div>© 2026 Esthetic Auto Detail • Todos os direitos reservados</div>
+            <div class="flex items-center gap-x-6">
+                <a href="#" class="hover:text-white">Instagram</a>
+                <a href="#" class="hover:text-white">WhatsApp</a>
+                <span class="text-xs">Site desenvolvido por <span class="text-white/70">Lucas Renan</span></span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CART MODAL -->
+    <div id="cart-modal" onclick="if (event.target.id === 'cart-modal') closeCart()"
+        class="hidden fixed inset-0 bg-black/80 z-[100] flex items-end lg:items-center justify-center">
+        <div onclick="event.stopImmediatePropagation()"
+            class="bg-[#111] w-full lg:w-[420px] lg:rounded-3xl lg:m-4 rounded-t-3xl p-6 max-h-[85vh] flex flex-col">
+
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-semibold">Seu Carrinho</h3>
+                <button onclick="closeCart()"
+                    class="text-3xl leading-none text-white/40 hover:text-white">&times;</button>
+            </div>
+
+            <div id="cart-items" class="flex-1 overflow-auto space-y-4 pr-1 text-sm">
+                <!-- Itens do carrinho via JS -->
+            </div>
+
+            <div class="border-t border-white/10 pt-5 mt-auto">
+                <div class="flex justify-between text-lg font-semibold mb-6">
+                    <span>Total</span>
+                    <span id="cart-total">R$ 0,00</span>
+                </div>
+
+                <button onclick="checkout()"
+                    class="w-full btn-gold py-4 rounded-3xl text-base font-semibold flex items-center justify-center gap-x-2">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    Finalizar Compra no WhatsApp
+                </button>
+                <p class="text-center text-[10px] text-white/50 mt-3">Você será redirecionado com todos os dados
+                    preenchidos</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHECKOUT FORM MODAL -->
+    <div id="checkout-modal" onclick="if (event.target.id === 'checkout-modal') closeCheckout()"
+        class="hidden fixed inset-0 bg-black/80 z-[110] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()" class="bg-[#111] rounded-3xl w-full max-w-md p-7">
+            <h3 class="text-2xl font-semibold mb-1">Finalizar Pedido</h3>
+            <p class="text-white/60 text-sm mb-6">Preencha seus dados para enviarmos o pedido via WhatsApp</p>
+
+            <form id="checkout-form" onsubmit="submitOrder(event)">
+                <div class="space-y-4">
+                    <div>
+                        <label class="text-xs tracking-widest text-white/60 block mb-1.5">SEU NOME COMPLETO</label>
+                        <input type="text" id="customer-name" required
+                            class="w-full bg-[#1a1a1a] border border-white/10 rounded-2xl px-5 py-3 text-sm outline-none focus:border-[#ff6a00]">
+                    </div>
+                    <div>
+                        <label class="text-xs tracking-widest text-white/60 block mb-1.5">WHATSAPP / TELEFONE</label>
+                        <input type="tel" id="customer-phone" required placeholder="(81) 99999-9999"
+                            class="w-full bg-[#1a1a1a] border border-white/10 rounded-2xl px-5 py-3 text-sm outline-none focus:border-[#ff6a00]">
+                    </div>
+                    <div>
+                        <label class="text-xs tracking-widest text-white/60 block mb-1.5">FORMA DE PAGAMENTO</label>
+                        <select id="payment-method" required
+                            class="w-full bg-[#1a1a1a] border border-white/10 rounded-2xl px-5 py-3 text-sm outline-none">
+                            <option value="Pix">Pix (com desconto)</option>
+                            <option value="Cartão de Crédito">Cartão de Crédito</option>
+                            <option value="Cartão de Débito">Cartão de Débito</option>
+                            <option value="Dinheiro">Dinheiro na entrega</option>
+                            <option value="Transferência">Transferência Bancária</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex gap-x-3 mt-8">
+                    <button type="button" onclick="closeCheckout()"
+                        class="flex-1 py-3.5 rounded-3xl border border-white/30 text-sm font-medium hover:bg-white/5">Cancelar</button>
+                    <button type="submit" class="flex-1 btn-gold py-3.5 rounded-3xl text-sm font-semibold">Enviar Pedido
+                        via WhatsApp</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- PRODUCT DETAIL MODAL -->
+    <div id="product-modal" onclick="if (event.target.id === 'product-modal') closeProductModal()"
+        class="hidden fixed inset-0 bg-black/80 z-[120] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()"
+            class="bg-[#111] w-full max-w-[920px] rounded-3xl overflow-hidden shadow-2xl">
+
+            <div class="flex flex-col lg:flex-row">
+                <!-- Imagem do Produto -->
+                <div class="lg:w-5/12 relative bg-[#0d0d0f]">
+                    <img id="modal-product-image"
+                        class="w-full h-full max-h-[420px] lg:max-h-[520px] object-cover lg:rounded-l-3xl"
+                        alt="Produto">
+                    <div id="modal-discount-badge"
+                        class="hidden absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-4 py-1 rounded-full tracking-wider">
+                        DESCONTO PIX
+                    </div>
+                </div>
+
+                <!-- Informações -->
+                <div class="lg:w-7/12 p-8 lg:p-10 flex flex-col">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div id="modal-brand"
+                                class="text-[10px] uppercase tracking-[2px] text-white/50 font-medium mb-1"></div>
+                            <h2 id="modal-name" class="text-3xl font-semibold leading-tight pr-8"></h2>
+                        </div>
+                        <button onclick="closeProductModal()"
+                            class="text-white/40 hover:text-white text-4xl leading-none -mt-2 -mr-1">&times;</button>
+                    </div>
+
+                    <div id="modal-description"
+                        class="mt-6 text-white/70 text-[15px] leading-relaxed max-h-[220px] overflow-y-auto pr-2">
+                    </div>
+
+                    <div class="mt-auto pt-8">
+                        <!-- Preço -->
+                        <div id="modal-price" class="mb-7">
+                            <!-- Preenchido dinamicamente via JS -->
+                        </div>
+
+                        <!-- Quantidade + Botão -->
+                        <div>
+                            <div class="text-xs tracking-widest text-white/60 mb-2.5">QUANTIDADE</div>
+                            <div class="flex items-center gap-x-4">
+                                <div class="flex items-center border border-white/20 rounded-2xl overflow-hidden">
+                                    <button onclick="changeModalQuantity(-1)"
+                                        class="w-11 h-11 flex items-center justify-center text-2xl hover:bg-white/5 active:bg-white/10 transition-colors select-none">-</button>
+                                    <div id="modal-quantity"
+                                        class="w-12 text-center font-mono text-xl font-semibold border-x border-white/20 py-1">
+                                        1</div>
+                                    <button onclick="changeModalQuantity(1)"
+                                        class="w-11 h-11 flex items-center justify-center text-2xl hover:bg-white/5 active:bg-white/10 transition-colors select-none">+</button>
+                                </div>
+
+                                <button onclick="addCurrentProductToCart()"
+                                    class="flex-1 btn-gold py-[17px] rounded-2xl text-base font-semibold flex items-center justify-center gap-x-2 active:scale-[0.985] transition-transform">
+                                    <i class="fa-solid fa-cart-plus text-lg"></i>
+                                    <span>Adicionar ao Carrinho</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
