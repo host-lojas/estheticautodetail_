@@ -233,26 +233,8 @@
     <div class="footer-brand">ESTHETIC AUTO DETAIL © 2026</div>
 
     <!-- Redirect Meta (fallback for no JS) -->
-    <meta http-equiv="refresh" content="0; url=sobre/">
+    <meta http-equiv="refresh" content="0; url=./sobre/">
 
-    <!-- JavaScript Redirect (faster) -->
-    <script>
-        // Immediate redirect to /sobre
-        (function () {
-            const BASE = window.location.hostname.includes("github.io")
-                ? "/EstheticAutoDetailv2"
-                : "";
-
-            window.location.replace(`${BASE}/sobre/`);
-
-            // Use replace to avoid back button issues
-            if (window.location.pathname === '/' ||
-                window.location.pathname.endsWith('/index.html') ||
-                window.location.pathname === '') {
-                window.location.replace(target);
-            }
-        })();
-    </script>
 </body>
 
 </html>
