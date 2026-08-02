@@ -7,29 +7,53 @@ let currentProducts = [];
 let currentBrands = [];
 let isLoggedIn = false;
 
-// Simple session persistence for better UX + basic anti-bypass (re-check on reload)
+// Session persistence + anti-bypass (re-check on reload + integrity token)
+const SESSION_KEY = 'esthetic_admin_session';
+const SESSION_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+
+function _sessionToken(loginTime) {
+    // Simple integrity token (not cryptographic, but raises bar for casual console bypass)
+    const seed = String(loginTime) + '|' + (navigator.userAgent || '').slice(0, 40);
+    let h = 0;
+    for (let i = 0; i < seed.length; i++) {
+        h = ((h << 5) - h) + seed.charCodeAt(i);
+        h |= 0;
+    }
+    return 'e' + Math.abs(h).toString(36);
+}
+
 function saveSession() {
-    localStorage.setItem('esthetic_admin_session', JSON.stringify({
+    const loginTime = Date.now();
+    localStorage.setItem(SESSION_KEY, JSON.stringify({
         loggedIn: true,
-        loginTime: Date.now()
+        loginTime: loginTime,
+        token: _sessionToken(loginTime)
     }));
 }
 
 function clearSession() {
-    localStorage.removeItem('esthetic_admin_session');
+    localStorage.removeItem(SESSION_KEY);
 }
 
 function checkSession() {
-    const raw = localStorage.getItem('esthetic_admin_session');
+    const raw = localStorage.getItem(SESSION_KEY);
     if (!raw) return false;
     try {
         const session = JSON.parse(raw);
-        const MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
-        if (session.loggedIn && (Date.now() - (session.loginTime || 0) < MAX_AGE_MS)) {
-            return true;
+        if (!session.loggedIn || !session.loginTime || !session.token) {
+            clearSession();
+            return false;
         }
-        clearSession();
-        return false;
+        if (Date.now() - session.loginTime >= SESSION_MAX_AGE_MS) {
+            clearSession();
+            return false;
+        }
+        // Integrity check
+        if (session.token !== _sessionToken(session.loginTime)) {
+            clearSession();
+            return false;
+        }
+        return true;
     } catch (e) {
         clearSession();
         return false;
@@ -38,12 +62,33 @@ function checkSession() {
 
 // Guard for protected actions - prevents easy bypass via console or devtools
 function requireAuth() {
-    if (!isLoggedIn) {
+    // Double-check: both in-memory flag AND valid persisted session
+    if (!isLoggedIn || !checkSession()) {
+        isLoggedIn = false;
         alert('Sessão expirada ou acesso não autorizado. Faça login novamente.');
         logout();
         return false;
     }
     return true;
+}
+
+// Periodically re-validate session while dashboard is open
+let _sessionWatchdog = null;
+function startSessionWatchdog() {
+    if (_sessionWatchdog) clearInterval(_sessionWatchdog);
+    _sessionWatchdog = setInterval(() => {
+        if (isLoggedIn && !checkSession()) {
+            isLoggedIn = false;
+            alert('Sessão expirada. Faça login novamente.');
+            logout();
+        }
+    }, 60 * 1000); // a cada 1 minuto
+}
+function stopSessionWatchdog() {
+    if (_sessionWatchdog) {
+        clearInterval(_sessionWatchdog);
+        _sessionWatchdog = null;
+    }
 }
 
 function initSupabase() {
@@ -145,10 +190,12 @@ function showDashboard() {
     document.getElementById('dashboard').classList.remove('hidden');
     isLoggedIn = true;
     saveSession();
+    startSessionWatchdog();
     loadAdminProducts();
 }
 
 function logout() {
+    stopSessionWatchdog();
     document.getElementById('dashboard').classList.add('hidden');
     document.getElementById('auth-screen').classList.remove('hidden');
     document.getElementById('admin-password').value = '';
@@ -160,14 +207,15 @@ function logout() {
 // ================== PRODUCTS MANAGEMENT ==================
 async function loadAdminProducts() {
     if (!isLoggedIn) {
-        return; // Silencioso durante restauração de sessão ou antes do login
+        return;
     }
-    const tbody = document.getElementById('products-table-body');
-    tbody.innerHTML = `<tr><td colspan="7" class="px-6 py-8 text-center text-white/50">Carregando produtos...</td></tr>`;
+    const grid = document.getElementById('products-grid');
+    if (grid) {
+        grid.innerHTML = `<div class="products-grid-empty"><i class="fa-solid fa-spinner fa-spin"></i><p>Carregando produtos...</p></div>`;
+    }
 
     try {
         if (!supabaseClient) {
-            // Demo mode - localStorage
             currentProducts = JSON.parse(localStorage.getItem('esthetic_products') || '[]');
         } else {
             const { data, error } = await supabaseClient
@@ -179,69 +227,182 @@ async function loadAdminProducts() {
             currentProducts = data || [];
         }
 
-        renderAdminTable();
+        refreshBrandsList();
+        renderAdminProducts();
         updateStats();
     } catch (err) {
         console.error(err);
-        tbody.innerHTML = `<tr><td colspan="7" class="px-6 py-8 text-center text-red-400">Erro ao carregar. Verifique Supabase.</td></tr>`;
+        if (grid) {
+            grid.innerHTML = `<div class="products-grid-empty text-red-400"><i class="fa-solid fa-exclamation-circle"></i><p>Erro ao carregar. Verifique Supabase.</p></div>`;
+        }
     }
 }
 
-function renderAdminTable() {
-    const tbody = document.getElementById('products-table-body');
-    tbody.innerHTML = '';
+function getUniqueBrands() {
+    const brands = new Set();
+    currentProducts.forEach(p => {
+        if (p.brand && p.brand.trim() !== '') {
+            brands.add(p.brand.trim());
+        }
+    });
+    return Array.from(brands).sort((a, b) => a.localeCompare(b, 'pt-BR'));
+}
+
+function refreshBrandsList() {
+    currentBrands = getUniqueBrands();
+}
+
+function populateBrandSelect(selectedBrand = '') {
+    const select = document.getElementById('product-brand-select');
+    const newInput = document.getElementById('product-brand-new');
+    if (!select) return;
+
+    select.innerHTML = '';
+    const optNone = document.createElement('option');
+    optNone.value = '';
+    optNone.textContent = 'Sem marca';
+    select.appendChild(optNone);
+
+    currentBrands.forEach(brand => {
+        const opt = document.createElement('option');
+        opt.value = brand;
+        opt.textContent = brand;
+        select.appendChild(opt);
+    });
+
+    const optNew = document.createElement('option');
+    optNew.value = '__new__';
+    optNew.textContent = '+ Criar nova marca...';
+    select.appendChild(optNew);
+
+    if (selectedBrand && currentBrands.includes(selectedBrand)) {
+        select.value = selectedBrand;
+        newInput.classList.add('hidden');
+        newInput.value = '';
+    } else if (selectedBrand) {
+        select.value = '__new__';
+        newInput.classList.remove('hidden');
+        newInput.value = selectedBrand;
+    } else {
+        select.value = '';
+        newInput.classList.add('hidden');
+        newInput.value = '';
+    }
+}
+
+function handleBrandSelectChange() {
+    const select = document.getElementById('product-brand-select');
+    const newInput = document.getElementById('product-brand-new');
+    if (select.value === '__new__') {
+        newInput.classList.remove('hidden');
+        newInput.focus();
+    } else {
+        newInput.classList.add('hidden');
+        newInput.value = '';
+    }
+}
+
+function getSelectedBrand() {
+    const select = document.getElementById('product-brand-select');
+    const newInput = document.getElementById('product-brand-new');
+    if (select.value === '__new__') {
+        return (newInput.value || '').trim() || null;
+    }
+    return select.value || null;
+}
+
+function renderAdminProducts() {
+    const grid = document.getElementById('products-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
 
     if (currentProducts.length === 0) {
-        tbody.innerHTML = `
-            <tr>
-                <td colspan="7" class="px-6 py-16 text-center">
-                    <div class="text-white/40">
-                        <i class="fa-solid fa-boxes text-4xl mb-3"></i>
-                        <p>Nenhum produto cadastrado ainda.</p>
-                        <button onclick="showAddProductModal()" class="mt-4 text-[#ff6a00] text-sm underline">Adicionar o primeiro produto</button>
-                    </div>
-                </td>
-            </tr>`;
+        grid.innerHTML = `
+            <div class="products-grid-empty">
+                <i class="fa-solid fa-boxes"></i>
+                <p>Nenhum produto cadastrado ainda.</p>
+                <button onclick="showAddProductModal()" class="mt-4 text-[#ff6a00] text-sm underline">Adicionar o primeiro produto</button>
+            </div>`;
+        document.getElementById('product-count').textContent = `(0)`;
         return;
     }
 
-    currentProducts.forEach((product, index) => {
+    currentProducts.forEach((product) => {
         const hasPrice = product.price && product.price > 0;
         const hasDiscount = product.discount_price && product.discount_price > 0;
 
-        const row = document.createElement('tr');
-        row.className = `table-row ${!product.active ? 'opacity-60' : ''}`;
-        row.dataset.id = product.id;
-        row.innerHTML = `
-            <td class="px-4 py-4 text-center drag-handle text-white/40">
+        const card = document.createElement('div');
+        card.className = `product-card ${!product.active ? 'inactive' : ''}`;
+        card.dataset.id = product.id;
+
+        const imageHtml = product.image_url
+            ? `<img src="${product.image_url}" alt="${(product.name || '').replace(/"/g, '&quot;')}" loading="lazy">`
+            : `<div class="no-image"><i class="fa-solid fa-image"></i></div>`;
+
+        let pricesHtml = '';
+        if (hasDiscount && hasPrice) {
+            pricesHtml = `
+                <span class="card-price-discount">R$ ${product.discount_price.toFixed(2).replace('.', ',')}</span>
+                <span class="card-price-old">R$ ${product.price.toFixed(2).replace('.', ',')}</span>`;
+        } else if (hasDiscount) {
+            pricesHtml = `<span class="card-price-discount">R$ ${product.discount_price.toFixed(2).replace('.', ',')}</span>`;
+        } else if (hasPrice) {
+            pricesHtml = `<span class="card-price">R$ ${product.price.toFixed(2).replace('.', ',')}</span>`;
+        } else {
+            pricesHtml = `<span class="card-price" style="color:rgba(255,255,255,0.35)">—</span>`;
+        }
+
+        card.innerHTML = `
+            <div class="card-drag-handle" title="Arraste para reordenar">
                 <i class="fa-solid fa-grip-vertical"></i>
-            </td>
-            <td class="px-6 py-4 font-medium">${product.name}</td>
-            <td class="px-6 py-4 text-white/70">${product.brand || '-'}</td>
-            <td class="px-6 py-4 text-right font-mono">${hasPrice ? 'R$ ' + product.price.toFixed(2).replace('.', ',') : '<span class="text-white/40">—</span>'}</td>
-            <td class="px-6 py-4 text-right font-mono text-red-400">${hasDiscount ? 'R$ ' + product.discount_price.toFixed(2).replace('.', ',') : '<span class="text-white/40">—</span>'}</td>
-            <td class="px-6 py-4 text-center">
-                <span class="inline-block px-3 py-0.5 text-xs rounded-full ${product.active ? 'bg-emerald-500/10 text-emerald-400' : 'bg-white/10 text-white/50'}">
+            </div>
+            <div class="card-image">
+                ${imageHtml}
+            </div>
+            <div class="card-body">
+                <div class="card-name">${product.name || 'Sem nome'}</div>
+                <div class="card-brand">${product.brand || 'Sem marca'}</div>
+                <div class="card-prices">${pricesHtml}</div>
+            </div>
+            <div class="card-footer">
+                <span class="card-status ${product.active ? 'active' : 'inactive'}">
                     ${product.active ? 'Ativo' : 'Inativo'}
                 </span>
-            </td>
-            <td class="px-4 py-4">
-                <div class="flex justify-end gap-x-1">
-                    <button onclick="editProduct(${product.id})" class="p-2 text-white/60 hover:text-white"><i class="fa-solid fa-edit"></i></button>
-                    <button onclick="toggleActive(${product.id}, ${!product.active})" class="p-2 text-white/60 hover:text-white"><i class="fa-solid fa-power-off"></i></button>
-                    <button onclick="deleteProduct(${product.id})" class="p-2 text-red-400/70 hover:text-red-400"><i class="fa-solid fa-trash"></i></button>
+                <div class="card-actions">
+                    <button type="button" onclick="editProduct(${product.id})" title="Editar">
+                        <i class="fa-solid fa-edit"></i>
+                    </button>
+                    <button type="button" onclick="toggleActive(${product.id}, ${!product.active})" title="${product.active ? 'Desativar' : 'Ativar'}">
+                        <i class="fa-solid fa-power-off"></i>
+                    </button>
+                    <button type="button" class="delete" onclick="deleteProduct(${product.id})" title="Excluir">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
                 </div>
-            </td>
+            </div>
         `;
-        tbody.appendChild(row);
+        grid.appendChild(card);
     });
 
-    // Ativar SortableJS para reordenação
+    // SortableJS otimizado para desktop e mobile (touch)
     if (window.Sortable) {
-        new Sortable(tbody, {
-            handle: '.drag-handle',
-            animation: 150,
-            onEnd: async function (evt) {
+        // Destroy previous instance if any
+        if (grid._sortable) {
+            try { grid._sortable.destroy(); } catch (e) {}
+        }
+        grid._sortable = new Sortable(grid, {
+            handle: '.card-drag-handle',
+            animation: 200,
+            ghostClass: 'sortable-ghost',
+            chosenClass: 'sortable-chosen',
+            dragClass: 'sortable-drag',
+            forceFallback: false,
+            fallbackOnBody: true,
+            swapThreshold: 0.65,
+            delay: 80,                 // pequeno delay evita conflito com scroll no mobile
+            delayOnTouchOnly: true,
+            touchStartThreshold: 5,
+            onEnd: async function () {
                 await updateProductOrder();
             }
         });
@@ -252,33 +413,35 @@ function renderAdminTable() {
 
 async function updateProductOrder() {
     if (!requireAuth()) return;
-    const rows = document.querySelectorAll('#products-table-body tr');
+    const cards = document.querySelectorAll('#products-grid .product-card');
     const newOrder = [];
 
-    rows.forEach((row, index) => {
-        const id = parseInt(row.dataset.id);
+    cards.forEach((card, index) => {
+        const id = parseInt(card.dataset.id);
         newOrder.push({ id, display_order: index });
     });
 
     try {
         if (!supabaseClient) {
-            // Atualizar localStorage
             currentProducts.forEach(p => {
                 const found = newOrder.find(o => o.id === p.id);
                 if (found) p.display_order = found.display_order;
             });
+            currentProducts.sort((a, b) => {
+                const oa = newOrder.find(o => o.id === a.id)?.display_order ?? 0;
+                const ob = newOrder.find(o => o.id === b.id)?.display_order ?? 0;
+                return oa - ob;
+            });
             localStorage.setItem('esthetic_products', JSON.stringify(currentProducts));
         } else {
-            // Batch update no Supabase
             for (const item of newOrder) {
                 await supabaseClient.from('products').update({ display_order: item.display_order }).eq('id', item.id);
             }
         }
-        // Recarregar para refletir
-        await loadAdminProducts();
     } catch (e) {
         console.error('Erro ao salvar ordem:', e);
         alert('Erro ao salvar a nova ordem. Recarregue a página.');
+        await loadAdminProducts();
     }
 }
 
@@ -286,7 +449,6 @@ function updateStats() {
     const total = currentProducts.length;
     const active = currentProducts.filter(p => p.active).length;
 
-    // Calcular marcas únicas dinamicamente
     const uniqueBrands = new Set(
         currentProducts
             .map(p => p.brand)
@@ -298,12 +460,85 @@ function updateStats() {
     document.getElementById('stat-brands').textContent = uniqueBrands.size;
     document.getElementById('last-update').textContent = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 }
+// ================== IMAGE PREVIEW ==================
+let previewObjectUrl = null; // para revogar blob URLs e evitar memory leak
+
+function setImagePreview(src) {
+    const img = document.getElementById('image-preview');
+    const placeholder = document.getElementById('image-placeholder');
+    const box = document.getElementById('image-preview-box');
+    const clearBtn = document.getElementById('clear-image-btn');
+
+    if (src) {
+        img.src = src;
+        img.classList.remove('hidden');
+        placeholder.classList.add('hidden');
+        box.classList.add('has-image');
+        clearBtn.classList.remove('hidden');
+    } else {
+        img.src = '';
+        img.classList.add('hidden');
+        placeholder.classList.remove('hidden');
+        box.classList.remove('has-image');
+        clearBtn.classList.add('hidden');
+    }
+}
+
+function revokePreviewUrl() {
+    if (previewObjectUrl) {
+        URL.revokeObjectURL(previewObjectUrl);
+        previewObjectUrl = null;
+    }
+}
+
+function previewProductImage(event) {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+
+    // Só aceita imagem
+    if (!file.type.startsWith('image/')) {
+        alert('Selecione um arquivo de imagem (JPG, PNG, WebP...).');
+        event.target.value = '';
+        return;
+    }
+
+    revokePreviewUrl();
+    previewObjectUrl = URL.createObjectURL(file);
+    setImagePreview(previewObjectUrl);
+
+    // Limpa o campo URL para priorizar o arquivo
+    document.getElementById('product-image-url').value = '';
+}
+
+function previewImageFromUrl(url) {
+    const trimmed = (url || '').trim();
+    // Se há arquivo selecionado, não sobrescreve o preview com URL
+    const fileInput = document.getElementById('product-image-file');
+    if (fileInput.files && fileInput.files.length > 0) return;
+
+    revokePreviewUrl();
+    if (trimmed) {
+        setImagePreview(trimmed);
+    } else {
+        setImagePreview(null);
+    }
+}
+
+function clearImagePreview() {
+    revokePreviewUrl();
+    setImagePreview(null);
+    document.getElementById('product-image-file').value = '';
+    document.getElementById('product-image-url').value = '';
+}
 
 function showAddProductModal() {
     document.getElementById('modal-title').textContent = 'Novo Produto';
     document.getElementById('product-form').reset();
     document.getElementById('product-id').value = '';
     document.getElementById('product-active').checked = true;
+    clearImagePreview();
+    refreshBrandsList();
+    populateBrandSelect('');
     document.getElementById('product-modal').classList.remove('hidden');
     document.getElementById('product-modal').classList.add('flex');
 }
@@ -315,7 +550,6 @@ function editProduct(id) {
     document.getElementById('modal-title').textContent = 'Editar Produto';
     document.getElementById('product-id').value = product.id;
     document.getElementById('product-name').value = product.name || '';
-    document.getElementById('product-brand').value = product.brand || '';
     document.getElementById('product-category').value = product.category || 'produto';
     document.getElementById('product-price').value = product.price || '';
     document.getElementById('product-discount').value = product.discount_price || '';
@@ -325,6 +559,18 @@ function editProduct(id) {
     document.getElementById('product-image-file').value = '';
     document.getElementById('product-active').checked = product.active !== false;
 
+    // Popula select de marcas com a marca atual do produto
+    refreshBrandsList();
+    populateBrandSelect(product.brand || '');
+
+    // Mostra preview da imagem já salva (se houver)
+    revokePreviewUrl();
+    if (product.image_url) {
+        setImagePreview(product.image_url);
+    } else {
+        setImagePreview(null);
+    }
+
     document.getElementById('product-modal').classList.remove('hidden');
     document.getElementById('product-modal').classList.add('flex');
 }
@@ -332,6 +578,7 @@ function editProduct(id) {
 function closeProductModal() {
     document.getElementById('product-modal').classList.remove('flex');
     document.getElementById('product-modal').classList.add('hidden');
+    revokePreviewUrl();
 }
 
 // Função auxiliar para fazer upload de imagem no Supabase Storage
@@ -388,7 +635,7 @@ async function saveProduct(e) {
 
     const productData = {
         name: document.getElementById('product-name').value.trim(),
-        brand: document.getElementById('product-brand').value.trim() || null,
+        brand: getSelectedBrand(),
         category: document.getElementById('product-category').value,
         price: parseFloat(document.getElementById('product-price').value) || null,
         discount_price: parseFloat(document.getElementById('product-discount').value) || null,
@@ -794,6 +1041,7 @@ async function initAdmin() {
         isLoggedIn = true;
         document.getElementById('auth-screen').classList.add('hidden');
         document.getElementById('dashboard').classList.remove('hidden');
+        startSessionWatchdog();
         loadAdminProducts();
         console.log('%c[Esthetic Admin] Sessão restaurada automaticamente', 'color:#22c55e');
         return;

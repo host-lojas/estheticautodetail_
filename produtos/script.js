@@ -39,6 +39,33 @@ function initSupabase() {
 
     supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     loadProducts();
+    setupRealtime(); // ← Realtime ativado
+}
+
+// ================== REALTIME ==================
+function setupRealtime() {
+    if (!supabaseClient) return;
+
+    supabaseClient
+        .channel('products-realtime')
+        .on(
+            'postgres_changes',
+            {
+                event: '*',              // INSERT, UPDATE e DELETE
+                schema: 'public',
+                table: 'products'
+            },
+            (payload) => {
+                console.log('[Realtime] Mudança detectada:', payload.eventType, payload);
+                // Recarrega a lista completa (simples e confiável)
+                loadProducts();
+            }
+        )
+        .subscribe((status) => {
+            if (status === 'SUBSCRIBED') {
+                console.log('%c[Realtime] Escutando mudanças na tabela products', 'color:#22c55e');
+            }
+        });
 }
 
 async function loadProducts() {

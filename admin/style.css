@@ -130,3 +130,387 @@ textarea:focus {
         -webkit-overflow-scrolling: touch;
     }
 }
+/* ============================================
+   Pré-visualização de imagem do produto
+   ============================================ */
+
+.image-preview-box {
+    position: relative;
+    width: 100%;
+    max-width: 160px;
+    aspect-ratio: 1 / 1;
+    flex-shrink: 0;
+    border-radius: 16px;
+    border: 2px dashed rgba(255, 255, 255, 0.12);
+    background: #1a1a1a;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (min-width: 640px) {
+    .image-preview-box {
+        width: 140px;
+        max-width: 140px;
+    }
+}
+
+.image-preview-box.has-image {
+    border-style: solid;
+    border-color: rgba(255, 106, 0, 0.35);
+}
+
+.image-preview-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.image-preview-box img.hidden {
+    display: none;
+}
+
+.image-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.6875rem;
+    text-align: center;
+    padding: 12px;
+    pointer-events: none;
+}
+
+.image-placeholder i {
+    font-size: 1.75rem;
+    opacity: 0.6;
+}
+
+.image-placeholder.hidden {
+    display: none;
+}
+
+.clear-image-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.15s;
+    z-index: 2;
+}
+
+.clear-image-btn:hover {
+    background: #ef4444;
+    border-color: transparent;
+    transform: scale(1.05);
+}
+
+.clear-image-btn.hidden {
+    display: none;
+}
+
+/* ============================================
+   Grade de Cards de Produtos (Responsiva)
+   ============================================ */
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .products-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    .products-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.product-card {
+    background: #111;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    position: relative;
+    touch-action: none; /* ajuda no drag em touch */
+}
+
+.product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.45);
+    border-color: rgba(255, 255, 255, 0.14);
+}
+
+.product-card.inactive {
+    opacity: 0.65;
+}
+
+.product-card .card-drag-handle {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    z-index: 5;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: grab;
+    transition: color 0.15s, background 0.15s, transform 0.15s;
+    font-size: 0.8rem;
+}
+
+.product-card .card-drag-handle:hover,
+.product-card .card-drag-handle:active {
+    color: #ff6a00;
+    background: rgba(0, 0, 0, 0.85);
+    transform: scale(1.08);
+}
+
+.product-card .card-drag-handle:active {
+    cursor: grabbing;
+}
+
+/* Área de arraste mais ampla no mobile: o card inteiro pode ser usado */
+@media (max-width: 639px) {
+    .product-card {
+        border-radius: 0.85rem;
+    }
+    .product-card .card-drag-handle {
+        width: 32px;
+        height: 32px;
+        top: 4px;
+        left: 4px;
+        font-size: 0.9rem;
+    }
+    .product-card .card-body {
+        padding: 0.65rem 0.7rem 0.5rem;
+    }
+    .product-card .card-name {
+        font-size: 0.8rem;
+        -webkit-line-clamp: 2;
+    }
+    .product-card .card-brand {
+        font-size: 0.65rem;
+    }
+    .product-card .card-prices {
+        gap: 0.25rem 0.5rem;
+    }
+    .product-card .card-price,
+    .product-card .card-price-discount {
+        font-size: 0.78rem;
+    }
+    .product-card .card-price-old {
+        font-size: 0.68rem;
+    }
+    .product-card .card-footer {
+        padding: 0.5rem 0.65rem 0.65rem;
+    }
+    .product-card .card-status {
+        font-size: 0.6rem;
+        padding: 0.15rem 0.4rem;
+    }
+    .product-card .card-actions button {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+}
+
+.product-card .card-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.product-card .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+}
+
+.product-card .card-image .no-image {
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 2rem;
+}
+
+.product-card .card-body {
+    padding: 0.85rem 0.95rem 0.6rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.product-card .card-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    line-height: 1.25;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-card .card-brand {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.product-card .card-prices {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.3rem 0.6rem;
+    margin-top: 0.15rem;
+}
+
+.product-card .card-price {
+    font-family: ui-monospace, monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.product-card .card-price-discount {
+    font-family: ui-monospace, monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #f87171;
+}
+
+.product-card .card-price-old {
+    font-family: ui-monospace, monospace;
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: line-through;
+}
+
+.product-card .card-footer {
+    padding: 0.6rem 0.9rem 0.85rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem;
+}
+
+.product-card .card-status {
+    font-size: 0.62rem;
+    padding: 0.18rem 0.5rem;
+    border-radius: 9999px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+.product-card .card-status.active {
+    background: rgba(16, 185, 129, 0.12);
+    color: #34d399;
+}
+
+.product-card .card-status.inactive {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.product-card .card-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.1rem;
+}
+
+.product-card .card-actions button {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    color: rgba(255, 255, 255, 0.55);
+    transition: color 0.15s, background 0.15s;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.product-card .card-actions button:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+.product-card .card-actions button.delete:hover {
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+}
+
+/* Empty state for grid */
+.products-grid-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3.5rem 1.5rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.products-grid-empty i {
+    font-size: 2.25rem;
+    margin-bottom: 0.6rem;
+    display: block;
+}
+
+/* Sortable visual feedback */
+.sortable-ghost {
+    opacity: 0.35;
+}
+
+.sortable-chosen {
+    box-shadow: 0 0 0 2px #ff6a00;
+    z-index: 10;
+}
+
+.sortable-drag {
+    opacity: 0.95;
+    transform: scale(1.03);
+    box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.6);
+}

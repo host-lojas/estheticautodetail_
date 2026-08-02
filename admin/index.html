@@ -146,7 +146,7 @@
                     <h3 class="font-semibold text-base sm:text-lg">Lista de Produtos <span id="product-count"
                             class="text-white/50 font-normal">(0)</span></h3>
                     <div class="flex flex-wrap items-center gap-2">
-                        <div class="text-xs text-white/50 hidden md:block mr-2">Arraste para reordenar</div>
+                        <div class="text-xs text-white/50 hidden md:block mr-2">Arraste os cards para reordenar</div>
                         <button onclick="exportBackup()"
                             class="text-xs px-3.5 py-2 rounded-xl sm:rounded-2xl border border-white/20 hover:bg-white/5 flex items-center gap-x-1.5 transition-colors">
                             <i class="fa-solid fa-download"></i>
@@ -162,30 +162,12 @@
                     </div>
                 </div>
 
-                <!-- Tabela Otimizada para Telas Menores -->
-                <div class="bg-[#111] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 shadow-xl">
-                    <div class="overflow-x-auto table-container">
-                        <table class="w-full text-left min-w-[640px]">
-                            <thead class="bg-white/5 text-[11px] tracking-widest text-white/60 uppercase">
-                                <tr>
-                                    <th class="w-10 px-4 sm:px-6 py-3.5"></th>
-                                    <th class="px-4 sm:px-6 py-3.5">Produto</th>
-                                    <th class="px-4 sm:px-6 py-3.5">Marca</th>
-                                    <th class="px-4 sm:px-6 py-3.5 text-right">Preço</th>
-                                    <th class="px-4 sm:px-6 py-3.5 text-right">Preço Pix</th>
-                                    <th class="px-4 sm:px-6 py-3.5 text-center">Status</th>
-                                    <th class="w-24 px-4 sm:px-6 py-3.5 text-center">Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody id="products-table-body" class="divide-y divide-white/10 text-sm">
-                                <!-- Preenchido via JS -->
-                            </tbody>
-                        </table>
-                    </div>
+                <!-- Grade de Cards de Produtos (Responsiva - 2 colunas no mobile) -->
+                <div id="products-grid" class="products-grid">
+                    <!-- Preenchido via JS com cards -->
                 </div>
 
-                <p class="text-center text-xs text-white/40 mt-4">Os produtos são exibidos no catálogo público na ordem
-                    acima.</p>
+                <p class="text-center text-xs text-white/40 mt-6">Os produtos são exibidos no catálogo público na ordem dos cards. No celular, segure o ícone de grip para arrastar e reordenar.</p>
 
                 <!-- DANGER ZONE -->
                 <div class="mt-8 p-5 sm:p-6 bg-red-950/20 border border-red-500/30 rounded-2xl sm:rounded-3xl">
@@ -280,8 +262,14 @@
 
                     <div>
                         <label class="text-[11px] tracking-widest text-white/60 font-medium uppercase">MARCA</label>
-                        <input type="text" id="product-brand" placeholder="Vonixx, Ceramic Pro..."
+                        <select id="product-brand-select"
+                            onchange="handleBrandSelectChange()"
                             class="mt-1.5 w-full bg-[#1a1a1a] border border-white/10 rounded-xl sm:rounded-2xl px-4 py-3 text-sm focus:border-[#ff6a00] transition-colors">
+                            <option value="">Sem marca</option>
+                            <option value="__new__">+ Criar nova marca...</option>
+                        </select>
+                        <input type="text" id="product-brand-new" placeholder="Digite o nome da nova marca"
+                            class="mt-2 w-full bg-[#1a1a1a] border border-white/10 rounded-xl sm:rounded-2xl px-4 py-3 text-sm focus:border-[#ff6a00] transition-colors hidden">
                     </div>
 
                     <div>
@@ -320,19 +308,40 @@
                         <label class="text-[11px] tracking-widest text-white/60 font-medium uppercase">IMAGEM DO
                             PRODUTO</label>
 
-                        <!-- Upload do dispositivo -->
-                        <div class="mt-1.5 bg-[#1a1a1a] p-3 border border-white/10 rounded-xl sm:rounded-2xl">
-                            <input type="file" id="product-image-file" accept="image/*"
-                                class="block w-full text-xs sm:text-sm text-white/70 file:mr-3 file:py-2 file:px-3.5 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#ff6a00] file:text-[#0d0d0f] hover:file:bg-[#e86a0f] cursor-pointer">
-                            <p class="text-[10px] text-white/40 mt-1.5">Envie uma foto do seu dispositivo (recomendado)
-                            </p>
-                        </div>
+                        <!-- Preview + Upload -->
+                        <div class="mt-1.5 flex flex-col sm:flex-row gap-4 items-stretch">
+                            <!-- Área de preview -->
+                            <div id="image-preview-box" class="image-preview-box">
+                                <img id="image-preview" class="hidden" alt="Pré-visualização">
+                                <div id="image-placeholder" class="image-placeholder">
+                                    <i class="fa-solid fa-image"></i>
+                                    <span>Sem imagem</span>
+                                </div>
+                                <button type="button" id="clear-image-btn" class="clear-image-btn hidden"
+                                    onclick="clearImagePreview()" title="Remover imagem">
+                                    <i class="fa-solid fa-times"></i>
+                                </button>
+                            </div>
 
-                        <!-- URL alternativa -->
-                        <div class="mt-3">
-                            <label class="text-[10px] text-white/50 block">Ou insira a URL da imagem (opcional)</label>
-                            <input type="url" id="product-image-url" placeholder="https://exemplo.com/imagem.jpg"
-                                class="mt-1 w-full bg-[#1a1a1a] border border-white/10 rounded-xl sm:rounded-2xl px-4 py-2.5 text-xs sm:text-sm focus:border-[#ff6a00] transition-colors">
+                            <!-- Controles de upload -->
+                            <div class="flex-1 flex flex-col gap-3 min-w-0">
+                                <div class="bg-[#1a1a1a] p-3 border border-white/10 rounded-xl sm:rounded-2xl">
+                                    <input type="file" id="product-image-file" accept="image/*"
+                                        onchange="previewProductImage(event)"
+                                        class="block w-full text-xs sm:text-sm text-white/70 file:mr-3 file:py-2 file:px-3.5 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#ff6a00] file:text-[#0d0d0f] hover:file:bg-[#e86a0f] cursor-pointer">
+                                    <p class="text-[10px] text-white/40 mt-1.5">Envie uma foto do seu dispositivo
+                                        (recomendado)</p>
+                                </div>
+
+                                <div>
+                                    <label class="text-[10px] text-white/50 block">Ou insira a URL da imagem
+                                        (opcional)</label>
+                                    <input type="url" id="product-image-url"
+                                        placeholder="https://exemplo.com/imagem.jpg"
+                                        oninput="previewImageFromUrl(this.value)"
+                                        class="mt-1 w-full bg-[#1a1a1a] border border-white/10 rounded-xl sm:rounded-2xl px-4 py-2.5 text-xs sm:text-sm focus:border-[#ff6a00] transition-colors">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
